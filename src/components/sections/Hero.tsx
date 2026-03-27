@@ -39,12 +39,30 @@ const BlurText = ({ text }: { text: string }) => {
 
 export function Hero() {
   return (
-    <section 
-      className="relative min-h-screen w-full flex flex-col items-center pt-40 pb-32 px-6 overflow-hidden"
-      style={{
-        background: "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255,255,255,0.05) 0%, transparent 70%)"
-      }}
-    >
+    <section className="relative min-h-screen w-full flex flex-col items-center pt-40 pb-32 px-6 overflow-hidden">
+      {/* Background Video & Overlays */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <video 
+          src="/background.mp4" 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="w-full h-full object-cover opacity-90" 
+        />
+        
+        {/* Seamless transition to black at the bottom */}
+        <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black via-black/80 to-transparent" />
+        
+        {/* Subtle radial glow at the top for aesthetic */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255,255,255,0.05) 0%, transparent 70%)"
+          }}
+        />
+      </div>
+
       <div className="flex flex-col items-center text-center z-10 w-full max-w-6xl mx-auto">
         <motion.div {...fadeUp(0)}>
           <Badge>THE PLATFORM FOR INDIAN BRANDS</Badge>
