@@ -83,28 +83,36 @@ export function Hero() {
 
       <motion.div 
         {...fadeUp(0.9)}
-        className="relative w-full max-w-[900px] mx-auto mt-20 aspect-video liquid-glass rounded-3xl overflow-hidden z-10"
+        className="relative w-full max-w-[900px] mx-auto mt-20 aspect-video z-10"
       >
-        <div 
-          className="absolute inset-0 z-0 opacity-[0.05]"
-          style={{
-            backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
-            backgroundSize: "40px 40px"
-          }}
-        />
-        
-        <div className="absolute inset-0 flex items-center justify-center z-10">
-          <span className="font-mono text-white/10 text-xs tracking-widest">DRAPE DASHBOARD</span>
+        <div className="absolute inset-0 z-10">
+          <div className="liquid-glass rounded-3xl w-full h-full">
+            <div 
+              className="absolute inset-0 z-0 opacity-[0.05]"
+              style={{
+                backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
+                backgroundSize: "40px 40px"
+              }}
+            />
+            
+            <div className="absolute inset-0 flex items-center justify-center z-10">
+              <span className="font-mono text-white/10 text-xs tracking-widest">DRAPE DASHBOARD</span>
+            </div>
+          </div>
         </div>
 
-        <div className="absolute -top-4 -left-4 md:top-6 md:-left-6 liquid-glass rounded-2xl p-4 md:p-6 z-20">
-          <div className="font-heading italic text-3xl md:text-4xl text-white">4,200+</div>
-          <div className="font-mono text-xs text-white/40 tracking-wider mt-1 uppercase">stores created</div>
+        <div className="absolute -top-4 -left-4 md:-top-6 md:-left-6 z-20">
+          <div className="liquid-glass rounded-2xl p-4 md:p-6">
+            <div className="font-heading italic text-3xl md:text-4xl text-white">4,200+</div>
+            <div className="font-mono text-xs text-white/40 tracking-wider mt-1 uppercase">stores created</div>
+          </div>
         </div>
 
-        <div className="absolute -bottom-4 -right-4 md:bottom-6 md:-right-6 liquid-glass rounded-2xl p-4 md:p-6 z-20">
-          <div className="font-heading italic text-3xl md:text-4xl text-white">₹2.4Cr+</div>
-          <div className="font-mono text-xs text-white/40 tracking-wider mt-1 uppercase">earned by brands</div>
+        <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 z-20">
+          <div className="liquid-glass rounded-2xl p-4 md:p-6">
+            <div className="font-heading italic text-3xl md:text-4xl text-white">₹2.4Cr+</div>
+            <div className="font-mono text-xs text-white/40 tracking-wider mt-1 uppercase">earned by brands</div>
+          </div>
         </div>
       </motion.div>
     </section>

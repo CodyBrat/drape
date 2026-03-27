@@ -18,7 +18,7 @@ export function ScrollReveal() {
   return (
     <section 
       ref={containerRef}
-      className="py-44 md:py-64 bg-black px-6 border-t border-white/5"
+      className="relative py-44 md:py-64 bg-black px-6 border-t border-white/5"
     >
       <div className="max-w-4xl mx-auto text-center">
         <p className="text-3xl md:text-4xl lg:text-5xl font-heading italic text-white tracking-tight leading-[1.2] flex flex-wrap justify-center">

@@ -65,37 +65,41 @@ export function Pricing() {
           </motion.div>
 
           {/* STARTER PLAN */}
-          <motion.div {...fadeUp(0.5)} className="liquid-glass-strong rounded-3xl p-8 border border-white/20 flex flex-col relative">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 liquid-glass rounded-full px-4 py-1 font-mono text-[10px] tracking-widest text-white">
-              MOST POPULAR
+          <motion.div {...fadeUp(0.5)} className="relative flex flex-col">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 w-max">
+              <div className="liquid-glass rounded-full px-4 py-1 font-mono text-[10px] tracking-widest text-white">
+                MOST POPULAR
+              </div>
             </div>
-            <div className="font-mono text-xs tracking-widest text-white/30 uppercase">STARTER</div>
-            <div className="mt-4 flex items-baseline">
-              <span className="font-heading italic text-5xl text-white">₹299</span>
-              <span className="font-body text-sm text-white/30 ml-2">/month</span>
+            <div className="liquid-glass-strong rounded-3xl p-8 border border-white/20 flex flex-col h-full">
+              <div className="font-mono text-xs tracking-widest text-white/30 uppercase">STARTER</div>
+              <div className="mt-4 flex items-baseline">
+                <span className="font-heading italic text-5xl text-white">₹299</span>
+                <span className="font-body text-sm text-white/30 ml-2">/month</span>
+              </div>
+              
+              <div className="border-t border-white/5 my-6" />
+              
+              <div className="space-y-3 flex-1">
+                {[
+                  'Up to 30 products',
+                  'Custom domain',
+                  'Remove Drape branding',
+                  'All templates',
+                  '2% commission per sale',
+                  'Basic analytics'
+                ].map((feature, i) => (
+                  <div key={i} className="flex gap-3 items-start">
+                    <div className="w-1.5 h-1.5 rounded-full bg-white/80 mt-1.5 shrink-0" />
+                    <span className="font-body text-sm text-white/80">{feature}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <Button variant="solid" className="w-full mt-8 py-3">
+                GET STARTED
+              </Button>
             </div>
-            
-            <div className="border-t border-white/5 my-6" />
-            
-            <div className="space-y-3 flex-1">
-              {[
-                'Up to 30 products',
-                'Custom domain',
-                'Remove Drape branding',
-                'All templates',
-                '2% commission per sale',
-                'Basic analytics'
-              ].map((feature, i) => (
-                <div key={i} className="flex gap-3 items-start">
-                  <div className="w-1.5 h-1.5 rounded-full bg-white/80 mt-1.5 shrink-0" />
-                  <span className="font-body text-sm text-white/80">{feature}</span>
-                </div>
-              ))}
-            </div>
-            
-            <Button variant="solid" className="w-full mt-8 py-3">
-              GET STARTED
-            </Button>
           </motion.div>
 
           {/* GROWTH PLAN */}
