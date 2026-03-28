@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Barlow, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { Navbar } from "@/components/sections/Navbar";
 
 const instrumentSerif = Instrument_Serif({
   weight: "400",
@@ -35,6 +36,7 @@ export default function RootLayout({
       <body
         className={`${instrumentSerif.variable} ${barlow.variable} ${jetbrainsMono.variable} font-body antialiased`}
       >
+        <Navbar />
         {children}
       </body>
     </html>

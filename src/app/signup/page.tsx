@@ -68,104 +68,105 @@ export default function SignupPage() {
         />
       </div>
 
-      {/* LOGO */}
-      <div className="relative z-10 mb-8 w-full max-w-md flex justify-center">
-        <Link href="/" className="font-mono font-bold text-sm tracking-widest text-white">
-          DRAPE.
-        </Link>
-      </div>
+      {/* Form Panel */}
 
       {/* Form Panel */}
       <motion.div 
-        className="relative z-10 liquid-glass-strong rounded-2xl p-8 md:p-10 max-w-md w-full mx-auto"
+        className="relative z-10 liquid-glass-strong rounded-[2.5rem] p-8 md:p-12 max-w-[480px] w-full mx-auto"
         variants={entranceVariants}
         initial="hidden"
         animate="visible"
       >
-        <AnimatedHeadline text="Start your brand." />
-        <p className="font-body font-light text-sm text-white/40 mb-8">
-          Free forever. No credit card required.
-        </p>
-
-        <div className="flex gap-4 mb-8 flex-wrap">
-          <span className="liquid-glass rounded-full px-3 py-1 text-xs font-mono text-white/40 tracking-widest flex items-center">
-            · FREE FOREVER
-          </span>
-          <span className="liquid-glass rounded-full px-3 py-1 text-xs font-mono text-white/40 tracking-widest flex items-center">
-            · NO CREDIT CARD
-          </span>
-          <span className="liquid-glass rounded-full px-3 py-1 text-xs font-mono text-white/40 tracking-widest flex items-center mt-2 md:mt-0">
-            · 5 MIN SETUP
-          </span>
+        <div className="mb-10">
+          <AnimatedHeadline text="Start your brand." />
+          <p className="font-body font-light text-base text-white/40 mt-2">
+            Free forever. No credit card required.
+          </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex flex-col">
-            <label className="font-mono text-xs text-white/40 tracking-widest uppercase mb-2">
-              YOUR NAME
-            </label>
-            <input 
-              type="text" 
-              placeholder="Arjun Singh"
-              required
-              className="bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-xl px-4 py-3 text-white font-body text-sm placeholder:text-[rgba(255,255,255,0.25)] focus:border-[rgba(255,255,255,0.3)] focus:outline-none transition-colors duration-150 w-full"
-            />
+        <div className="flex gap-3 mb-10 flex-wrap">
+          {['FREE FOREVER', 'NO CREDIT CARD', '5 MIN SETUP'].map((badge) => (
+            <span key={badge} className="liquid-glass border border-white/5 rounded-full px-4 py-1.5 text-[9px] font-mono text-white/50 tracking-widest flex items-center bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
+              · {badge}
+            </span>
+          ))}
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2 group">
+              <label className="font-mono text-[10px] text-white/30 tracking-[0.2em] uppercase ml-1 transition-colors group-focus-within:text-white/60">
+                YOUR NAME
+              </label>
+              <input 
+                type="text" 
+                placeholder="Arjun Singh"
+                required
+                className="bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white font-body text-sm placeholder:text-white/20 focus:border-white/40 focus:bg-white/[0.06] focus:outline-none transition-all duration-300 w-full hover:border-white/20"
+              />
+            </div>
+
+            <div className="space-y-2 group">
+              <label className="font-mono text-[10px] text-white/30 tracking-[0.2em] uppercase ml-1 transition-colors group-focus-within:text-white/60">
+                EMAIL ADDRESS
+              </label>
+              <input 
+                type="email" 
+                placeholder="you@example.com"
+                required
+                className="bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white font-body text-sm placeholder:text-white/20 focus:border-white/40 focus:bg-white/[0.06] focus:outline-none transition-all duration-300 w-full hover:border-white/20"
+              />
+            </div>
           </div>
 
-          <div className="flex flex-col">
-            <label className="font-mono text-xs text-white/40 tracking-widest uppercase mb-2">
-              EMAIL ADDRESS
-            </label>
-            <input 
-              type="email" 
-              placeholder="you@example.com"
-              required
-              className="bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-xl px-4 py-3 text-white font-body text-sm placeholder:text-[rgba(255,255,255,0.25)] focus:border-[rgba(255,255,255,0.3)] focus:outline-none transition-colors duration-150 w-full"
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label className="font-mono text-xs text-white/40 tracking-widest uppercase mb-2">
+          <div className="space-y-2 group">
+            <label className="font-mono text-[10px] text-white/30 tracking-[0.2em] uppercase ml-1 transition-colors group-focus-within:text-white/60">
               CREATE PASSWORD
             </label>
             <input 
               type="password" 
               placeholder="Min. 8 characters"
               required
-              className="bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-xl px-4 py-3 text-white font-body text-sm placeholder:text-[rgba(255,255,255,0.25)] focus:border-[rgba(255,255,255,0.3)] focus:outline-none transition-colors duration-150 w-full"
+              className="bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white font-body text-sm placeholder:text-white/20 focus:border-white/40 focus:bg-white/[0.06] focus:outline-none transition-all duration-300 w-full hover:border-white/20"
             />
           </div>
 
-          <div className="flex flex-col">
-            <label className="font-mono text-xs text-white/40 tracking-widest uppercase mb-2">
+          <div className="space-y-2 group">
+            <label className="font-mono text-[10px] text-white/30 tracking-[0.2em] uppercase ml-1 transition-colors group-focus-within:text-white/60">
               YOUR STORE NAME
             </label>
-            <input 
-              type="text" 
-              placeholder="e.g. VOIDWEAR"
-              required
-              className="bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-xl px-4 py-3 text-white font-body text-sm placeholder:text-[rgba(255,255,255,0.25)] focus:border-[rgba(255,255,255,0.3)] focus:outline-none transition-colors duration-150 w-full"
-            />
-            <p className="text-xs font-mono text-white/20 mt-1">drape.in/voidwear</p>
+            <div className="relative">
+              <input 
+                type="text" 
+                placeholder="e.g. VOIDWEAR"
+                required
+                className="bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white font-body text-sm placeholder:text-white/20 focus:border-white/40 focus:bg-white/[0.06] focus:outline-none transition-all duration-300 w-full hover:border-white/20"
+              />
+              <p className="text-[10px] font-mono text-white/20 mt-2 ml-1 flex items-center gap-1.5 animate-pulse">
+                <span className="w-1 h-1 rounded-full bg-white/20"></span>
+                drape.in/voidwear
+              </p>
+            </div>
           </div>
 
           <motion.button 
             type="submit"
-            whileHover={{ scale: 1.01 }}
+            whileHover={{ scale: 1.01, backgroundColor: "#f0f0f0" }}
             whileTap={{ scale: 0.98 }}
-            className="mt-6 bg-white text-black rounded-full px-6 py-3 w-full font-body font-medium text-sm transition duration-150"
+            className="mt-6 bg-white text-black rounded-full px-8 py-4 w-full font-body font-semibold text-sm transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
           >
             Create My Store &rarr;
           </motion.button>
         </form>
 
-        <p className="text-xs font-mono text-white/20 text-center mt-4 leading-relaxed">
-          By signing up you agree to our Terms <br/>and Privacy Policy.
+        <p className="text-[10px] font-mono text-white/20 text-center mt-8 leading-relaxed uppercase tracking-widest">
+          By signing up you agree to our <br/>
+          <Link href="#" className="hover:text-white/40 border-b border-white/10 pb-0.5">Terms</Link> and <Link href="#" className="hover:text-white/40 border-b border-white/10 pb-0.5">Privacy Policy</Link>.
         </p>
 
-        <div className="mt-8 text-center flex flex-col gap-1">
-          <span className="text-xs font-mono text-white/30">Already have an account?</span>
-          <Link href="/login" className="text-xs font-mono text-white/60 hover:text-white transition-colors">
+        <div className="mt-10 text-center flex flex-col gap-3">
+          <span className="text-xs font-mono text-white/20 tracking-wider">Already have an account?</span>
+          <Link href="/login" className="text-sm font-body text-white/60 hover:text-white transition-all duration-300 hover:tracking-wide">
             Sign in &rarr;
           </Link>
         </div>

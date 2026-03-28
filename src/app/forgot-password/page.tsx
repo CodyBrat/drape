@@ -67,12 +67,7 @@ export default function ForgotPasswordPage() {
         />
       </div>
 
-      {/* LOGO */}
-      <div className="relative z-10 mb-8 w-full max-w-md flex justify-center">
-        <Link href="/" className="font-mono font-bold text-sm tracking-widest text-white">
-          DRAPE.
-        </Link>
-      </div>
+      {/* Form Panel */}
 
       {/* Form Panel */}
       <motion.div 
@@ -95,24 +90,24 @@ export default function ForgotPasswordPage() {
                 Enter your email and we&apos;ll send you a reset link.
               </p>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="flex flex-col">
-                  <label className="font-mono text-xs text-white/40 tracking-widest uppercase mb-2">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-2 group">
+                  <label className="font-mono text-[10px] text-white/30 tracking-[0.2em] uppercase ml-1 transition-colors group-focus-within:text-white/60">
                     EMAIL ADDRESS
                   </label>
                   <input 
                     type="email" 
                     placeholder="you@example.com"
                     required
-                    className="bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-xl px-4 py-3 text-white font-body text-sm placeholder:text-[rgba(255,255,255,0.25)] focus:border-[rgba(255,255,255,0.3)] focus:outline-none transition-colors duration-150 w-full"
+                    className="bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white font-body text-sm placeholder:text-white/20 focus:border-white/40 focus:bg-white/[0.06] focus:outline-none transition-all duration-300 w-full hover:border-white/20"
                   />
                 </div>
 
                 <motion.button 
                   type="submit"
-                  whileHover={{ scale: 1.01 }}
+                  whileHover={{ scale: 1.01, backgroundColor: "#f0f0f0" }}
                   whileTap={{ scale: 0.98 }}
-                  className="mt-6 bg-white text-black rounded-full px-6 py-3 w-full font-body font-medium text-sm transition duration-150"
+                  className="mt-6 bg-white text-black rounded-full px-8 py-4 w-full font-body font-semibold text-sm transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
                 >
                   Send Reset Link &rarr;
                 </motion.button>
@@ -138,8 +133,8 @@ export default function ForgotPasswordPage() {
           )}
         </AnimatePresence>
 
-        <div className="mt-8 text-center flex flex-col gap-1 border-t border-white/10 pt-6">
-          <Link href="/login" className="text-xs font-mono text-white/30 hover:text-white/60 transition-colors">
+        <div className="mt-10 text-center flex flex-col gap-3 border-t border-white/5 pt-8">
+          <Link href="/login" className="text-[10px] font-mono text-white/20 hover:text-white transition-all duration-300 uppercase tracking-widest">
             &larr; Back to login
           </Link>
         </div>

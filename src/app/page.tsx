@@ -1,6 +1,5 @@
 "use client";
 
-import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { SocialProof } from "@/components/sections/SocialProof";
 import { Stats } from "@/components/sections/Stats";
@@ -14,7 +13,6 @@ import { Footer } from "@/components/sections/Footer";
 export default function Home() {
   return (
     <main className="bg-black min-h-screen">
-      <Navbar />
       <Hero />
       <SocialProof />
       <Stats />
