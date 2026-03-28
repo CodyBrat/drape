@@ -3,7 +3,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { AlertCircle } from 'lucide-react';
+import { useAuthStore } from '@/lib/store';
 
 const entranceVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -37,10 +39,22 @@ const AnimatedHeadline = ({ text }: { text: string }) => {
 
 export default function LoginPage() {
   const router = useRouter();
+  const loginStore = useAuthStore(state => state.login);
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [error, setError] = React.useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push('/dashboard');
+    setError(null);
+
+    // Mock verification
+    if (email === 'admin@drape.in' && password === 'admin123') {
+      loginStore(email, 'Arjun Singh');
+      router.push('/dashboard');
+    } else {
+      setError('Invalid credentials. Please try again.');
+    }
   };
 
   return (
@@ -87,6 +101,8 @@ export default function LoginPage() {
               <input 
                 type="email" 
                 placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 className="bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white font-body text-sm placeholder:text-white/20 focus:border-white/40 focus:bg-white/[0.06] focus:outline-none transition-all duration-300 w-full hover:border-white/20"
               />
@@ -105,6 +121,8 @@ export default function LoginPage() {
               <input 
                 type="password" 
                 placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 className="bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white font-body text-sm placeholder:text-white/20 focus:border-white/40 focus:bg-white/[0.06] focus:outline-none transition-all duration-300 w-full hover:border-white/20"
               />
@@ -115,6 +133,21 @@ export default function LoginPage() {
               </Link>
             </div>
           </div>
+
+          <AnimatePresence>
+            {error && (
+              <motion.div 
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3 flex items-center gap-3"
+              >
+                <AlertCircle size={14} className="text-red-500 shrink-0" />
+                <span className="text-xs text-red-500 font-medium">{error}</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           <motion.button 
             type="submit"
             whileHover={{ scale: 1.01, backgroundColor: "#f0f0f0" }}
@@ -124,6 +157,20 @@ export default function LoginPage() {
             Sign In &rarr;
           </motion.button>
         </form>
+
+        <div className="mt-6 bg-white/[0.02] border border-white/5 rounded-2xl p-4 flex flex-col gap-2">
+           <span className="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em]">Quick Access (Admin)</span>
+           <div className="flex flex-col gap-1">
+              <div className="flex justify-between items-center bg-black/20 px-3 py-1.5 rounded-lg border border-white/5">
+                 <span className="text-[10px] font-mono text-white/40 uppercase">Email</span>
+                 <span className="text-xs text-white/80 font-medium">admin@drape.in</span>
+              </div>
+              <div className="flex justify-between items-center bg-black/20 px-3 py-1.5 rounded-lg border border-white/5">
+                 <span className="text-[10px] font-mono text-white/40 uppercase">Pass</span>
+                 <span className="text-xs text-white/80 font-medium">admin123</span>
+              </div>
+           </div>
+        </div>
         <div className="my-10 relative flex items-center justify-center">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-white/5"></div>
