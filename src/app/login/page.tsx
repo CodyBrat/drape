@@ -18,7 +18,7 @@ const wordVariants = {
 const AnimatedHeadline = ({ text }: { text: string }) => {
   const words = text.split(" ");
   return (
-    <h1 className="font-heading italic text-4xl text-white leading-[0.9] mb-2 flex flex-wrap">
+    <h1 className="font-heading italic text-4xl text-white leading-[1.2] mb-2 flex flex-wrap pb-2">
       {words.map((word, i) => (
         <motion.span
           key={i}
