@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 
@@ -59,9 +60,11 @@ export function Pricing() {
               ))}
             </div>
             
-            <Button variant="outline" className="w-full mt-8 py-3 bg-transparent hover:bg-white/5 border-white/10 text-white/60">
-              START FREE
-            </Button>
+            <Link href="/signup" className="w-full mt-8">
+              <Button variant="outline" className="w-full py-3 bg-transparent hover:bg-white/5 border-white/10 text-white/60">
+                START FREE
+              </Button>
+            </Link>
           </motion.div>
 
           {/* STARTER PLAN */}
@@ -96,9 +99,11 @@ export function Pricing() {
                 ))}
               </div>
               
-              <Button variant="solid" className="w-full mt-8 py-3">
-                GET STARTED
-              </Button>
+              <Link href="/signup" className="w-full mt-8">
+                <Button variant="solid" className="w-full py-3">
+                  GET STARTED
+                </Button>
+              </Link>
             </div>
           </motion.div>
 
@@ -128,9 +133,11 @@ export function Pricing() {
               ))}
             </div>
             
-            <Button variant="outline" className="w-full mt-8 py-3 bg-transparent hover:bg-white/5 border-white/10 text-white/60">
-              GO PRO
-            </Button>
+            <Link href="/signup" className="w-full mt-8">
+              <Button variant="outline" className="w-full py-3 bg-transparent hover:bg-white/5 border-white/10 text-white/60">
+                GO PRO
+              </Button>
+            </Link>
           </motion.div>
         </div>
 

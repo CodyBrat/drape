@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { ArrowUpRight } from "lucide-react";
@@ -39,7 +40,7 @@ const BlurText = ({ text }: { text: string }) => {
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center pt-40 pb-32 px-6 overflow-hidden">
+    <section className="relative min-h-screen w-full flex flex-col items-center pt-32 pb-32 px-6 overflow-hidden">
       {/* Background Video & Overlays */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <video 
@@ -80,15 +81,19 @@ export function Hero() {
         </motion.p>
 
         <motion.div 
-          {...fadeUp(0.8)}
+          {...fadeUp(1)}
           className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8"
         >
-          <Button variant="primary">
-            Start for Free <ArrowUpRight size={14} />
-          </Button>
-          <Button variant="solid">
-            See How It Works
-          </Button>
+          <Link href="/signup">
+            <Button variant="primary">
+              Start for Free <ArrowUpRight size={14} />
+            </Button>
+          </Link>
+          <Link href="#features">
+            <Button variant="solid">
+              See How It Works
+            </Button>
+          </Link>
         </motion.div>
 
         <motion.p 

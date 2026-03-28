@@ -1,9 +1,8 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import { StatCard } from '@/components/dashboard/StatCard';
-import { DataTable } from '@/components/dashboard/DataTable';
 import { 
   IndianRupee, 
   ShoppingBag, 
@@ -11,235 +10,233 @@ import {
   TrendingUp, 
   Plus, 
   Store, 
-  Wallet,
-  ArrowRight
+  ArrowRight,
+  ChevronRight,
+  TrendingDown
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-interface Product {
-  name: string;
-  sold: number;
-  revenue: string;
-  percentage: number;
-}
-
-interface Order {
-  id: string;
-  customer: string;
-  product: string;
-  amount: string;
-  status: string;
-  date: string;
-}
-
-interface QuickAction {
-  title: string;
-  icon: any;
-  href: string;
-}
+import { motion, AnimatePresence } from 'framer-motion';
 
 const stats = [
-  { label: "Total Revenue", value: "₹1,24,500", change: "+12.5%", isPositive: true, icon: IndianRupee },
-  { label: "Total Orders", value: "284", change: "+8.2%", isPositive: true, icon: ShoppingBag },
-  { label: "Store Visitors", value: "12,430", change: "+23.1%", isPositive: true, icon: Users },
-  { label: "Conversion Rate", value: "2.3%", change: "-0.4%", isPositive: false, icon: TrendingUp },
+  { label: "Total Revenue", value: "₹1,24,500", change: "+12.5% vs last month", isPositive: true, icon: IndianRupee, variant: 'accent' as const, isMonetary: true },
+  { label: "Total Orders", value: "284", change: "+8.2% vs last month", isPositive: true, icon: ShoppingBag, variant: 'default' as const },
+  { label: "Store Visitors", value: "12,430", change: "+23.1% vs last month", isPositive: true, icon: Users, variant: 'default' as const },
+  { label: "Conversion Rate", value: "2.3%", change: "-0.4% vs last month", isPositive: false, icon: TrendingUp, variant: 'default' as const },
 ];
 
-const recentOrders: Order[] = [
-  { id: "#DRP-1042", customer: "Arjun Singh", product: "VOID OVERSIZED TEE", amount: "₹1,499", status: "Fulfilled", date: "Dec 1, 2025" },
-  { id: "#DRP-1041", customer: "Meera Nair", product: "ACID LOGO PUNCH", amount: "₹2,598", status: "Pending", date: "Dec 1, 2025" },
-  { id: "#DRP-1040", customer: "Rohan Varma", product: "NOISE CORE GRAPHIC", amount: "₹1,599", status: "Processing", date: "Nov 30, 2025" },
-  { id: "#DRP-1039", customer: "Anjali Gupta", product: "CORE BLACK BOX TEE", amount: "₹1,199", status: "Cancelled", date: "Nov 30, 2025" },
-  { id: "#DRP-1038", customer: "Siddharth Rao", product: "VOLTAGE DROP TEE", amount: "₹2,798", status: "Fulfilled", date: "Nov 29, 2025" },
+const revenueData = [
+  { day: 'Mon', value: 8200, label: '₹8.2k' },
+  { day: 'Tue', value: 12100, label: '₹12.1k' },
+  { day: 'Wed', value: 9400, label: '₹9.4k' },
+  { day: 'Thu', value: 15600, label: '₹15.6k' },
+  { day: 'Fri', value: 11200, label: '₹11.2k' },
+  { day: 'Sat', value: 18400, label: '₹18.4k' },
+  { day: 'Sun', value: 14500, label: '₹14.5k' },
 ];
 
-const topProducts: Product[] = [
-  { name: "VOID OVERSIZED TEE", sold: 124, revenue: "₹1,85,876", percentage: 80 },
-  { name: "ACID LOGO PUNCH", sold: 89, revenue: "₹1,15,611", percentage: 65 },
-  { name: "NOISE CORE GRAPHIC", sold: 67, revenue: "₹1,07,133", percentage: 45 },
-  { name: "CORE BLACK BOX TEE", sold: 45, revenue: "₹53,955", percentage: 32 },
-  { name: "VOLTAGE DROP TEE", sold: 38, revenue: "₹53,162", percentage: 28 },
-];
-
-const quickActions: QuickAction[] = [
-  { title: "Add Product", icon: Plus, href: "/dashboard/products" },
-  { title: "View Orders", icon: ShoppingBag, href: "/dashboard/orders" },
-  { title: "Edit Store", icon: Store, href: "/dashboard/settings" },
-  { title: "Manage Payouts", icon: Wallet, href: "/dashboard/payouts" },
-];
-
-const orderColumns = [
-  { key: "id", header: "Order", sortable: true },
-  { key: "customer", header: "Customer" },
-  { key: "product", header: "Product" },
-  { key: "amount", header: "Amount", sortable: true },
-  { key: "status", header: "Status" },
-  { key: "date", header: "Date" },
+const topProducts = [
+  { name: "VOID OVERSIZED TEE", revenue: "₹1,85,876", percentage: 80 },
+  { name: "ACID LOGO PUNCH", revenue: "₹1,15,611", percentage: 65 },
+  { name: "NOISE CORE GRAPHIC", revenue: "₹1,07,133", percentage: 45 },
+  { name: "CORE BLACK BOX TEE", revenue: "₹53,955", percentage: 32 },
+  { name: "VOLTAGE DROP TEE", revenue: "₹53,162", percentage: 28 },
 ];
 
 export default function OverviewPage() {
-  const renderOrderCell = (item: Order, column: any) => {
-    if (column.key === "status") {
-      const statusColors: Record<string, string> = {
-        Fulfilled: "bg-[#D1FAE5] text-[#065F46]",
-        Pending: "bg-[#FEF3C7] text-[#92400E]",
-        Processing: "bg-[#DBEAFE] text-[#1E40AF]",
-        Cancelled: "bg-[#FEE2E2] text-[#991B1B]",
-      };
-      
-      return (
-        <span className={cn(
-          "px-2.5 py-0.5 rounded-full text-[10px] font-medium tracking-wide uppercase",
-          statusColors[item.status]
-        )}>
-          {item.status}
-        </span>
-      );
-    }
-    return (item as any)[column.key];
-  };
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => setIsLoaded(true), []);
 
   return (
-    <DashboardLayout title="Overview">
-      <div className="flex flex-col">
-        <div className="mb-0">
-          <h2 className="text-2xl font-semibold text-[#111111] tracking-tight">Good morning, Arjun.</h2>
-          <p className="text-sm text-[#6B7280] mt-1 font-body">Here&apos;s what&apos;s happening with your store today.</p>
+    <DashboardLayout title="Overview" breadcrumb="Drape / Overview">
+      <div className="flex justify-between items-end mb-8">
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight text-[#111111]">
+            Good morning, Arjun.
+          </h2>
+          <p className="text-sm text-[#9CA3AF] mt-1 font-medium tracking-wide uppercase">
+            Monday, 2 December 2025
+          </p>
         </div>
 
-        {/* Stats Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
-          {stats.map((stat, i) => (
-            <StatCard key={i} {...stat} />
-          ))}
+        <div className="flex items-center gap-3">
+          <button className="px-5 py-2.5 rounded-xl border border-[#E5E7EB] bg-white text-sm font-semibold text-[#111111] hover:bg-[#F9FAFB] active:scale-95 transition-all shadow-sm flex items-center gap-2">
+            View Store <ArrowRight size={14} />
+          </button>
+          <button className="px-5 py-2.5 rounded-xl bg-[#111111] text-white text-sm font-semibold hover:opacity-90 active:scale-95 transition-all shadow-lg flex items-center gap-2">
+            <Plus size={16} strokeWidth={2.5} /> Add Product
+          </button>
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-10">
-          {/* Recent Orders Table */}
-          <div className="lg:col-span-2">
-            <DataTable<Order> 
-              title="Recent Orders" 
-              actionText="View all orders"
-              columns={orderColumns} 
-              data={recentOrders}
-              renderCell={renderOrderCell}
-            />
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {stats.map((stat, i) => (
+          <StatCard key={i} {...stat} />
+        ))}
+      </div>
 
-          {/* Top Products Card */}
-          <div className="bg-white border border-[#E5E7EB] rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-sm font-semibold text-[#111111]">Top Products</h2>
-              <button className="text-[10px] font-medium text-[#6B7280] hover:text-[#111111] uppercase tracking-widest transition-colors">By Units Sold</button>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
+        <div className="lg:col-span-2 space-y-4">
+          {/* Revenue Chart */}
+          <section className="bg-white border border-[#E5E7EB] rounded-2xl p-8 hover:shadow-lg transition-all duration-500 shadow-sm relative overflow-hidden group">
+            <div className="flex items-center justify-between mb-10">
+              <h3 className="font-semibold text-[#111111] flex items-center gap-2">
+                Revenue This Week
+                <ChevronRight size={16} className="text-[#9CA3AF]" />
+              </h3>
+              <div className="flex items-center gap-1.5 px-3 py-1 bg-[#D1FAE5] text-[#065F46] rounded-full text-[10px] font-bold tracking-widest uppercase border border-[#D1FAE5]">
+                <TrendingUp size={12} /> +12.4%
+              </div>
             </div>
-            
-            <div className="space-y-6">
-              {topProducts.map((product, i) => (
-                <div key={i} className="group">
-                  <div className="flex justify-between items-start mb-2">
-                    <div className="flex flex-col min-w-0">
-                      <span className="text-sm font-medium text-[#111111] truncate">{product.name}</span>
-                      <span className="text-[10px] text-[#6B7280] uppercase tracking-widest mt-0.5">{product.sold} units sold</span>
+
+            <div className="flex items-end justify-between h-40 gap-4 mt-6">
+              {revenueData.map((d, i) => {
+                const isToday = d.day === 'Sun';
+                return (
+                  <div key={i} className="flex-1 flex flex-col items-center gap-4 group/bar">
+                    <div className="relative w-full flex flex-col items-center gap-2">
+                       <AnimatePresence>
+                         <motion.span 
+                           initial={{ opacity: 0, scale: 0.8, y: 5 }}
+                           whileHover={{ opacity: 1, scale: 1, y: 0 }}
+                           className="absolute -top-10 text-[10px] font-bold text-white bg-black px-2 py-1 rounded shadow-lg opacity-0 pointer-events-none z-10"
+                         >
+                           {d.label}
+                         </motion.span>
+                       </AnimatePresence>
+                       <div className="w-10 bg-[#F5F5F5] rounded-t-xl relative overflow-hidden h-40">
+                         <motion.div 
+                           initial={{ height: 0 }}
+                           animate={{ height: isLoaded ? `${(d.value / 20000) * 100}%` : 0 }}
+                           transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                           className={cn(
+                             "absolute bottom-0 left-0 right-0 rounded-t-xl transition-all duration-300",
+                             isToday ? "bg-[#111111] shadow-[0_0_20px_rgba(0,0,0,0.1)]" : "bg-[#E5E7EB] group-hover/bar:bg-[#374151]"
+                           )}
+                         />
+                       </div>
                     </div>
-                    <span className="text-sm font-semibold text-[#111111]">{product.revenue}</span>
+                    <span className={cn(
+                      "text-[10px] font-bold tracking-widest uppercase",
+                      isToday ? "text-[#111111]" : "text-[#9CA3AF]"
+                    )}>{d.day}</span>
                   </div>
-                  <div className="w-full bg-[#F3F4F6] rounded-full h-1 overflow-hidden">
-                    <div 
-                      className="bg-[#111111] h-full rounded-full transition-all duration-1000" 
-                      style={{ width: `${product.percentage}%` }}
+                );
+              })}
+            </div>
+          </section>
+
+          {/* Recent Orders Table */}
+          <section className="bg-white border border-[#E5E7EB] rounded-2xl shadow-sm overflow-hidden transition-all duration-500 hover:shadow-lg">
+            <div className="px-6 pt-6 pb-4 flex items-center justify-between border-b border-[#F5F5F5]">
+              <h3 className="font-semibold text-[#111111]">Recent Orders</h3>
+              <button className="text-[11px] font-bold text-[#6B7280] hover:text-[#111111] uppercase tracking-widest transition-colors flex items-center gap-1">
+                View all <ArrowRight size={12} />
+              </button>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left">
+                <tbody>
+                  {[
+                    { id: "#DRP-1042", name: "Arjun Singh", amount: "₹1,499", status: "Fulfilled", color: "text-emerald-500 bg-emerald-500/10" },
+                    { id: "#DRP-1041", name: "Meera Nair", amount: "₹1,299", status: "Pending", color: "text-amber-500 bg-amber-500/10" },
+                    { id: "#DRP-1040", name: "Rohan Varma", amount: "₹1,599", status: "Processing", color: "text-blue-500 bg-blue-500/10" },
+                    { id: "#DRP-1039", name: "Anjali Gupta", amount: "₹1,199", status: "Cancelled", color: "text-rose-500 bg-rose-500/10" },
+                  ].map((order, i) => (
+                    <tr key={i} className="group border-b border-[#F5F5F5] last:border-0 hover:bg-[#F9FAFB] transition-all cursor-pointer">
+                      <td className="px-6 py-4 text-sm font-mono font-medium text-[#111111]">{order.id}</td>
+                      <td className="px-6 py-4 text-sm font-medium text-[#111111]">{order.name}</td>
+                      <td className="px-6 py-4 text-sm font-bold text-[#111111]">{order.amount}</td>
+                      <td className="px-6 py-4">
+                        <span className={cn(
+                          "px-2.5 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase",
+                          order.color
+                        )}>
+                          {order.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <div className="lg:col-span-1 space-y-4">
+          {/* Top Products Card */}
+          <section className="bg-white border border-[#E5E7EB] rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-500">
+            <h3 className="font-semibold text-[#111111] mb-2">Top Products</h3>
+            <p className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-widest">By Revenue</p>
+            
+            <div className="mt-8 space-y-6">
+              {topProducts.map((p, i) => (
+                <div key={i} className="group/item">
+                  <div className="flex justify-between items-start mb-3">
+                    <div className="flex items-center gap-3">
+                      <span className="text-[10px] font-mono text-[#9CA3AF] font-bold">0{i+1}</span>
+                      <span className="text-sm font-semibold text-[#111111] group-hover/item:text-black transition-colors">{p.name}</span>
+                    </div>
+                    <span className="text-sm font-bold text-[#111111]">{p.revenue}</span>
+                  </div>
+                  <div className="w-full h-1 bg-[#F5F5F5] rounded-full overflow-hidden">
+                    <motion.div 
+                      initial={{ width: 0 }}
+                      animate={{ width: isLoaded ? `${p.percentage}%` : 0 }}
+                      transition={{ duration: 1, delay: i * 0.1 }}
+                      className="bg-[#111111] h-full"
                     />
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-        </div>
+          </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10 mb-10">
-          {/* Quick Actions Card */}
-          <div>
-            <h2 className="text-sm font-semibold text-[#111111] mb-6">Quick Actions</h2>
-            <div className="grid grid-cols-2 gap-4">
-              {quickActions.map((action, i) => {
-                const Icon = action.icon;
-                return (
-                  <div 
-                    key={i}
-                    className="flex items-center gap-4 bg-white border border-[#E5E7EB] rounded-xl p-5 hover:bg-[#F9FAFB] hover:border-[#D1D5DB] group cursor-pointer transition-all duration-300 shadow-sm"
-                  >
-                    <div className="bg-[#F9FAFB] p-2 rounded-lg border border-[#E5E7EB] group-hover:bg-white group-hover:border-[#D1D5DB] transition-all">
-                      <Icon size={18} className="text-[#6B7280] group-hover:text-[#111111]" strokeWidth={1.5} />
-                    </div>
-                    <span className="text-sm font-medium text-[#111111]">{action.title}</span>
-                    <ArrowRight size={14} className="ml-auto text-[#9CA3AF] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+          {/* Quick Stats Card */}
+          <section className="bg-[#111111] rounded-2xl p-6 shadow-xl shadow-black/10">
+            <div className="grid grid-cols-2 gap-6">
+              {[
+                { label: "Avg Ticket", val: "₹438", icon: IndianRupee },
+                { label: "Return Rate", val: "2.1%", icon: TrendingDown },
+                { label: "Repeat Cust.", val: "34%", icon: Users },
+                { label: "Fulfillment", val: "3.2d", icon: ShoppingBag },
+              ].map((s, i) => (
+                <div key={i} className="flex flex-col gap-1.5">
+                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-white/40 mb-1">
+                    <s.icon size={14} />
                   </div>
-                );
-              })}
+                  <span className="text-lg font-bold text-white tracking-tight">{s.val}</span>
+                  <span className="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">{s.label}</span>
+                </div>
+              ))}
             </div>
-          </div>
+          </section>
 
-          {/* Store Status Card */}
-          <div className="bg-white border border-[#E5E7EB] rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300">
-            <h2 className="text-sm font-semibold text-[#111111] mb-6">Store Status</h2>
+          {/* Store Health Card */}
+          <section className="bg-white border border-[#E5E7EB] rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-500">
+            <h3 className="font-semibold text-[#111111]">Store Health</h3>
             
-            <div className="space-y-6">
-              <div className="flex items-center justify-between pb-4 border-b border-[#E5E7EB]">
-                <div className="flex flex-col">
-                  <span className="text-xs text-[#6B7280] font-medium uppercase tracking-widest mb-1.5">Visibility</span>
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#10B981]" />
-                    <span className="text-sm font-medium text-[#111111]">Store Live</span>
+            <div className="mt-6 space-y-5">
+              {[
+                { label: "Visibility", val: "Production Live", detail: "Live", color: "bg-emerald-500" },
+                { label: "Endpoint", val: "mystore.drape.in", detail: "Domain" },
+                { label: "Authority", val: "Growth Logistics", detail: "PRO", color: "bg-black text-white px-2 py-0.5 rounded text-[8px] font-bold" },
+                { label: "Next Cycle", val: "₹8,240 on Dec 15", detail: "Payout" },
+              ].map((h, i) => (
+                <div key={i} className="flex justify-between items-start group/health">
+                  <div className="flex flex-col">
+                    <span className="text-[9px] font-bold text-[#9CA3AF] uppercase tracking-[0.2em] mb-1">{h.label}</span>
+                    <div className="flex items-center gap-2">
+                      {h.color && !h.color.includes('text') && <span className={cn("w-1.5 h-1.5 rounded-full animate-pulse", h.color)} />}
+                      <span className={cn("text-[13px] font-semibold text-[#111111]", h.color?.includes('text') && h.color)}>{h.val}</span>
+                    </div>
                   </div>
+                  <span className="text-[9px] font-mono text-[#9CA3AF] uppercase tracking-widest pt-1">{h.detail}</span>
                 </div>
-                <div className="flex flex-col items-end">
-                   <span className="text-xs text-[#6B7280] font-medium uppercase tracking-widest mb-1.5">Current Plan</span>
-                   <span className="bg-[#111111] text-white rounded-full px-5 py-0.5 text-[9px] font-semibold tracking-widest uppercase shadow-sm">STARTER</span>
-                </div>
-              </div>
-
-              <div className="flex flex-col">
-                <span className="text-xs text-[#6B7280] font-medium uppercase tracking-widest mb-2">Public Domain</span>
-                <div className="flex items-center gap-2 bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-4 py-2 group cursor-pointer hover:border-[#D1D5DB] transition-colors shadow-inner">
-                  <Store size={14} className="text-[#9CA3AF]" />
-                  <span className="font-mono text-xs text-[#111111]">mystore.drape.in</span>
-                  <ExternalLink size={12} className="ml-auto text-[#9CA3AF] group-hover:text-[#111111] transition-colors" />
-                </div>
-                <button className="text-[10px] font-medium text-[#6B7280] hover:text-[#111111] transition-colors uppercase tracking-[0.1em] text-left mt-3 underline underline-offset-4 decoration-white/0 hover:decoration-[#111111]/20">Upgrade to Growth to use custom domain &rarr;</button>
-              </div>
-
-              <div className="flex items-center gap-4 pt-2">
-                 <div className="flex flex-col">
-                    <span className="text-xs text-[#6B7280] font-medium uppercase tracking-widest mb-1">Next Payout</span>
-                    <span className="text-sm font-semibold text-[#111111]">₹8,240 on Dec 15</span>
-                 </div>
-                 <button className="ml-auto text-xs font-semibold text-[#111111] hover:text-black transition-colors flex items-center gap-1.5 px-4 py-2 border border-[#E5E7EB] rounded-lg hover:bg-[#F9FAFB]">
-                    Manage <Wallet size={14} />
-                 </button>
-              </div>
+              ))}
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </DashboardLayout>
-  );
-}
-
-// Minimal icons for internal usage
-function ExternalLink(props: any) {
-  return (
-    <svg 
-      xmlns="http://www.w3.org/2000/svg" 
-      width={props.size || "24"} 
-      height={props.size || "24"} 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      stroke="currentColor" 
-      strokeWidth="2" 
-      strokeLinecap="round" 
-      strokeLinejoin="round" 
-      className={props.className}
-    >
-      <path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-    </svg>
   );
 }

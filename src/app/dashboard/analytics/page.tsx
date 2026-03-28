@@ -1,34 +1,36 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import { StatCard } from '@/components/dashboard/StatCard';
-import { DataTable } from '@/components/dashboard/DataTable';
-import { Eye, Users, MousePointer2, Clock, BarChart3, TrendingUp, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { 
+  IndianRupee, 
+  ShoppingBag, 
+  Users, 
+  TrendingUp, 
+  Download, 
+  BarChart3, 
+  Eye, 
+  Clock, 
+  Smartphone,
+  ChevronRight,
+  ChevronDown
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const stats = [
-  { label: "Pageviews", value: "48,230", change: "+42.5%", isPositive: true, icon: Eye },
-  { label: "Unique Visitors", value: "12,430", change: "+23.1%", isPositive: true, icon: Users },
-  { label: "Avg Session", value: "2m 14s", change: "+12.4%", isPositive: true, icon: Clock },
-  { label: "Bounce Rate", value: "64.2%", change: "-2.5%", isPositive: true, icon: MousePointer2 },
-];
-
-const revenueData = [
-  { day: 'Mon', value: 8200, label: '₹8.2k' },
-  { day: 'Tue', value: 12100, label: '₹12.1k' },
-  { day: 'Wed', value: 9500, label: '₹9.5k' },
-  { day: 'Thu', value: 14200, label: '₹14.2k' },
-  { day: 'Fri', value: 11800, label: '₹11.8k' },
-  { day: 'Sat', value: 18400, label: '₹18.4k' },
-  { day: 'Sun', value: 16200, label: '₹16.2k' },
+  { label: "Pageviews", value: "48,230", change: "+42.5% vs last month", isPositive: true, variant: 'accent' as const, icon: Eye },
+  { label: "Unique Visitors", value: "12,430", change: "+23.1% vs last month", isPositive: true, icon: Users },
+  { label: "Avg Session", value: "2m 14s", change: "+12.4% vs last month", isPositive: true, icon: Clock },
+  { label: "Bounce Rate", value: "64.2%", change: "-2.5% vs last month", isPositive: false, icon: Smartphone },
 ];
 
 const trafficSources = [
   { name: 'Direct', value: 42, color: 'bg-[#111111]' },
-  { name: 'Instagram', value: 31, color: 'bg-[#6B7280]' },
-  { name: 'Google', value: 18, color: 'bg-[#9CA3AF]' },
-  { name: 'WhatsApp', value: 9, color: 'bg-[#E5E7EB]' },
+  { name: 'Instagram', value: 31, color: 'bg-[#374151]' },
+  { name: 'Google', value: 18, color: 'bg-[#6B7280]' },
+  { name: 'WhatsApp', value: 9, color: 'bg-[#9CA3AF]' },
 ];
 
 const topPages = [
@@ -38,148 +40,179 @@ const topPages = [
   { path: '/about', views: '1,890', time: '0m 45s' },
 ];
 
-const pageColumns = [
-  { key: 'path', header: 'Page Path' },
-  { key: 'views', header: 'Views', sortable: true },
-  { key: 'time', header: 'Avg Time' },
-];
-
 export default function AnalyticsPage() {
+  const [isLoaded, setIsLoaded] = useState(false);
   const [activeRange, setActiveRange] = useState('7D');
   const ranges = ['7D', '30D', '90D', '12M'];
 
-  const maxRevenue = Math.max(...revenueData.map(d => d.value));
+  useEffect(() => setIsLoaded(true), []);
 
   return (
-    <DashboardLayout title="Analytics">
-      <div className="flex flex-col">
-        {/* Header with Selector */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-1.5 bg-white border border-[#E5E7EB] rounded-xl px-4 py-2 hover:border-[#D1D5DB] transition-all cursor-pointer shadow-sm group">
-            <BarChart3 size={16} className="text-[#6B7280]" />
-            <span className="text-sm font-semibold text-[#111111]">Store Performance</span>
-            <ChevronDown size={14} className="text-[#9CA3AF] group-hover:text-[#6B7280]" />
-          </div>
-
-          <div className="flex items-center gap-1 bg-[#F3F4F6] p-1 rounded-xl border border-[#E5E7EB] shadow-inner">
-            {ranges.map((range) => (
-              <button 
-                key={range}
-                onClick={() => setActiveRange(range)}
-                className={cn(
-                  "px-4 py-1.5 rounded-lg text-xs font-bold tracking-widest uppercase transition-all",
-                  activeRange === range 
-                    ? "bg-white text-[#111111] shadow-sm ring-1 ring-[#E5E7EB]" 
-                    : "text-[#6B7280] hover:text-[#111111]"
-                )}
-              >
-                {range}
-              </button>
-            ))}
-          </div>
+    <DashboardLayout title="Analytics" breadcrumb="Drape / Analytics">
+      <div className="flex justify-between items-end mb-8">
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight text-[#111111]">
+            Analytics
+          </h2>
+          <p className="text-sm text-[#9CA3AF] mt-1 font-medium tracking-wide uppercase">
+            Traffic & behavior analysis
+          </p>
         </div>
 
-        {/* Stats Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {stats.map((stat, i) => (
-            <StatCard key={i} {...stat} />
+        <div className="flex items-center gap-1.5 bg-white border border-[#E5E7EB] p-1.5 rounded-2xl shadow-sm">
+          {ranges.map((range) => (
+            <button 
+              key={range}
+              onClick={() => setActiveRange(range)}
+              className={cn(
+                "px-5 py-2 rounded-xl text-[11px] font-bold tracking-widest uppercase transition-all",
+                activeRange === range 
+                  ? "bg-[#111111] text-white shadow-lg shadow-black/10" 
+                  : "text-[#6B7280] hover:text-[#111111]"
+              )}
+            >
+              {range}
+            </button>
           ))}
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          {/* Revenue Chart */}
-          <div className="lg:col-span-2 bg-white border border-[#E5E7EB] rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300">
-            <div className="flex items-center justify-between mb-10">
-               <div>
-                  <h2 className="text-sm font-semibold text-[#111111]">Revenue over time</h2>
-                  <p className="text-xs text-[#6B7280] mt-1">Daily revenue generated for the last 7 days</p>
-               </div>
-               <div className="flex items-center gap-2 text-[#10B981] bg-[#D1FAE5] px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase border border-[#D1FAE5]">
-                  <TrendingUp size={12} />
-                  +12.4%
-               </div>
-            </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {stats.map((stat, i) => (
+          <StatCard key={i} {...stat} />
+        ))}
+      </div>
 
-            <div className="flex items-end justify-between h-48 gap-4 px-2">
-              {revenueData.map((d, i) => {
-                const height = (d.value / maxRevenue) * 100;
-                return (
-                  <div key={i} className="flex-1 flex flex-col items-center gap-4 group">
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-bold text-[#111111] bg-[#F9FAFB] px-2 py-1 rounded-md border border-[#E5E7EB] mb-1">{d.label}</span>
-                    <div className="w-full bg-[#F3F4F6] rounded-t-lg relative overflow-hidden group-hover:bg-[#E5E7EB] transition-colors" style={{ height: '100%' }}>
-                      <div 
-                        className="absolute bottom-0 left-0 right-0 bg-[#111111] rounded-t-lg transition-all duration-1000 ease-out shadow-sm"
-                        style={{ height: `${height}%` }}
-                      />
-                    </div>
-                    <span className="text-[10px] font-bold text-[#6B7280] uppercase tracking-widest">{d.day}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Traffic Sources */}
-          <div className="bg-white border border-[#E5E7EB] rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col">
-            <h2 className="text-sm font-semibold text-[#111111] mb-2">Traffic Sources</h2>
-            <p className="text-xs text-[#6B7280] mb-8">Where your visitors are coming from</p>
-            
-            <div className="space-y-6 flex-1">
-               {trafficSources.map((source, i) => (
-                 <div key={i}>
-                    <div className="flex justify-between items-center mb-2">
-                       <span className="text-sm font-medium text-[#111111]">{source.name}</span>
-                       <span className="text-xs font-bold text-[#6B7280]">{source.value}%</span>
-                    </div>
-                    <div className="w-full h-2 bg-[#F3F4F6] rounded-full overflow-hidden shadow-inner">
-                       <div className={cn("h-full rounded-full transition-all duration-1000", source.color)} style={{ width: `${source.value}%` }} />
-                    </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-6">
+        <div className="lg:col-span-2 space-y-4">
+           {/* Revenue Chart (Extended) */}
+           <section className="bg-white border border-[#E5E7EB] rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden group">
+              <div className="flex items-center justify-between mb-12">
+                 <div>
+                    <h3 className="font-semibold text-[#111111] flex items-center gap-2 tracking-tight">Revenue Trajectory</h3>
+                    <p className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-widest mt-2">Daily Settlement Summary</p>
                  </div>
-               ))}
-            </div>
+                 <button className="p-2.5 bg-[#F5F5F5] border border-[#E5E7EB] rounded-xl text-[#9CA3AF] hover:text-[#111111] transition-all">
+                    <Download size={16} />
+                 </button>
+              </div>
 
-            <div className="pt-6 border-t border-[#E5E7EB] mt-6">
-               <button className="w-full py-2.5 text-xs font-bold text-[#111111] bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl hover:bg-[#F3F4F6] transition-all tracking-widest uppercase">
-                  View Full Report
-               </button>
-            </div>
-          </div>
+              <div className="flex items-end justify-between h-56 gap-5 px-4 mb-2">
+                 {[8200, 12100, 9400, 15600, 11200, 18400, 14500].map((val, i) => {
+                    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+                    const isToday = days[i] === 'Sun';
+                    return (
+                      <div key={i} className="flex-1 flex flex-col items-center gap-6 group/bar">
+                        <div className="w-12 bg-[#F5F5F5] rounded-t-2xl relative overflow-hidden h-56">
+                           <motion.div 
+                             initial={{ height: 0 }}
+                             animate={{ height: isLoaded ? `${(val / 20000) * 100}%` : 0 }}
+                             transition={{ duration: 1, delay: i * 0.1, ease: "circOut" }}
+                             className={cn("absolute bottom-0 left-0 right-0 rounded-t-2xl transition-all", isToday ? "bg-[#111111] shadow-[0_0_30px_rgba(0,0,0,0.1)]" : "bg-[#E5E7EB] group-hover/bar:bg-[#111111]/40")}
+                           />
+                        </div>
+                        <span className={cn("text-[10px] font-bold uppercase tracking-widest", isToday ? "text-[#111111]" : "text-[#9CA3AF]")}>{days[i]}</span>
+                      </div>
+                    );
+                 })}
+              </div>
+           </section>
+
+           {/* Traffic Sources */}
+           <section className="bg-white border border-[#E5E7EB] rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-500">
+              <h3 className="font-semibold text-[#111111] mb-2 tracking-tight">Traffic Vectors</h3>
+              <p className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-widest mb-10">Inbound Acquisition Sources</p>
+              
+              <div className="space-y-10">
+                 {trafficSources.map((source, i) => (
+                   <div key={i} className="group/src">
+                      <div className="flex justify-between items-center mb-3">
+                         <span className="text-sm font-bold text-[#111111] group-hover/src:translate-x-1 transition-transform">{source.name}</span>
+                         <span className="text-[12px] font-mono font-black text-[#9CA3AF]">{source.value}%</span>
+                      </div>
+                      <div className="w-full h-2.5 bg-[#F5F5F5] rounded-full overflow-hidden shadow-inner relative">
+                         <motion.div 
+                           initial={{ width: 0 }}
+                           animate={{ width: isLoaded ? `${source.value}%` : 0 }}
+                           transition={{ duration: 1.5, delay: i * 0.2, ease: "circOut" }}
+                           className={cn("h-full rounded-full transition-all", source.color)} 
+                         />
+                      </div>
+                   </div>
+                 ))}
+              </div>
+           </section>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
-          <DataTable title="Top Pages" columns={pageColumns} data={topPages} />
-          
-          <div className="bg-white border border-[#E5E7EB] rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300">
-             <h2 className="text-sm font-semibold text-[#111111] mb-2">Device Breakdown</h2>
-             <p className="text-xs text-[#6B7280] mb-10">Visitors by device type</p>
+        <div className="lg:col-span-1 space-y-4">
+           {/* Top Pages */}
+           <section className="bg-white border border-[#E5E7EB] rounded-3xl p-6 shadow-sm hover:shadow-xl transition-all duration-500">
+              <h3 className="font-semibold text-[#111111] mb-6 tracking-tight">Engagement Flow</h3>
+              <div className="space-y-1 divide-y divide-[#F5F5F5]">
+                 {topPages.map((page, i) => (
+                   <div key={i} className="py-4 flex items-center justify-between group/page">
+                      <div className="flex flex-col gap-1">
+                         <span className="text-sm font-bold text-[#111111] group-hover/page:underline decoration-[#E5E7EB] underline-offset-4">{page.path}</span>
+                         <span className="text-[10px] font-mono font-medium text-[#9CA3AF] uppercase tracking-widest mt-0.5">{page.views} Sessions</span>
+                      </div>
+                      <span className="text-[11px] font-bold text-[#111111] bg-[#F5F5F5] px-2.5 py-1 rounded-lg">{page.time}</span>
+                   </div>
+                 ))}
+              </div>
+           </section>
 
-             <div className="flex items-end gap-6 h-12">
-                <div className="flex-1 bg-[#111111] rounded-lg relative group" style={{ width: '58%' }}>
-                   <div className="absolute -top-6 left-0 text-[10px] font-bold text-[#111111] uppercase tracking-widest">Desktop (58%)</div>
-                </div>
-                <div className="flex-[0.7] bg-[#6B7280] rounded-lg relative group">
-                   <div className="absolute -top-6 left-0 text-[10px] font-bold text-[#6B7280] uppercase tracking-widest">Mobile (38%)</div>
-                </div>
-                <div className="flex-[0.1] bg-[#E5E7EB] rounded-lg relative group">
-                   <div className="absolute -top-6 left-0 text-[10px] font-bold text-[#9CA3AF] uppercase tracking-widest">Other (4%)</div>
-                </div>
-             </div>
+           {/* Devices Distribution */}
+           <section className="bg-white border border-[#E5E7EB] rounded-3xl p-6 shadow-sm hover:shadow-xl transition-all duration-500">
+              <h3 className="font-semibold text-[#111111] mb-10 tracking-tight">Hardware Protocol</h3>
+              <div className="space-y-8">
+                 {[
+                   { label: "Desktop Authority", val: "58%", icon: "D" },
+                   { label: "Mobile Endpoint", val: "38%", icon: "M" },
+                   { label: "Tablet / Other", val: "4%", icon: "O" },
+                 ].map((d, i) => (
+                   <div key={i} className="flex flex-col gap-3">
+                      <div className="flex justify-between items-center">
+                         <span className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-widest">{d.label}</span>
+                         <span className="text-[12px] font-mono font-black text-[#111111]">{d.val}</span>
+                      </div>
+                      <div className="w-full h-1.5 bg-[#F5F5F5] rounded-full overflow-hidden">
+                         <motion.div 
+                           initial={{ width: 0 }}
+                           animate={{ width: isLoaded ? d.val : 0 }}
+                           transition={{ duration: 1, delay: 0.5 + (i * 0.1) }}
+                           className="bg-[#111111] h-full"
+                         />
+                      </div>
+                   </div>
+                 ))}
+              </div>
+           </section>
 
-             <div className="grid grid-cols-3 gap-6 mt-12">
-                <div className="flex flex-col">
-                   <span className="text-xs font-bold text-[#111111]">12.4k</span>
-                   <span className="text-[10px] font-medium text-[#6B7280] uppercase tracking-widest mt-1">Desktop</span>
-                </div>
-                <div className="flex flex-col">
-                   <span className="text-xs font-bold text-[#111111]">8.1k</span>
-                   <span className="text-[10px] font-medium text-[#6B7280] uppercase tracking-widest mt-1">Mobile</span>
-                </div>
-                <div className="flex flex-col">
-                   <span className="text-xs font-bold text-[#111111]">0.8k</span>
-                   <span className="text-[10px] font-medium text-[#6B7280] uppercase tracking-widest mt-1">Other</span>
-                </div>
-             </div>
-          </div>
+           {/* Conversion Funnel */}
+           <section className="bg-[#111111] rounded-3xl p-8 shadow-2xl shadow-black/20 text-white">
+              <h3 className="font-semibold text-white/50 text-[10px] font-mono uppercase tracking-[0.3em] mb-10">Conversion Funnel</h3>
+              <div className="space-y-3">
+                 {[
+                   { label: "Total Visitors", val: "12,430", pct: "100%" },
+                   { label: "Product View", val: "8,240", pct: "66%" },
+                   { label: "Add to Cart", val: "2,100", pct: "17%" },
+                   { label: "Purchase Mark", val: "284", pct: "2.3%" },
+                 ].map((s, i) => (
+                   <div key={i} className="relative group/step">
+                      <div 
+                        className="bg-white/10 hover:bg-white/20 border border-white/5 rounded-2xl p-4 flex items-center justify-between transition-all duration-500 cursor-pointer"
+                        style={{ width: `${100 - (i * 10)}%` }}
+                      >
+                         <div className="flex flex-col">
+                            <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">{s.label}</span>
+                            <span className="text-sm font-bold mt-1">{s.val}</span>
+                         </div>
+                         <span className="text-[11px] font-mono font-black text-white/20 group-hover/step:text-white/60 transition-colors">{s.pct}</span>
+                      </div>
+                   </div>
+                 ))}
+              </div>
+           </section>
         </div>
       </div>
     </DashboardLayout>

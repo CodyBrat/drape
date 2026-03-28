@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { ArrowUpDown } from 'lucide-react';
+import { ArrowUpDown, ChevronRight } from 'lucide-react';
 
 interface Column {
   key: string;
@@ -29,53 +29,53 @@ export function DataTable<T extends Record<string, any>>({
   renderCell 
 }: DataTableProps<T>) {
   return (
-    <div className="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+    <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl overflow-hidden shadow-xl transition-all duration-300">
       {(title || actionText) && (
-        <div className="px-6 py-4 flex items-center justify-between border-b border-[#E5E7EB]">
-          {title && <h2 className="text-sm font-semibold text-[#111111]">{title}</h2>}
+        <div className="px-10 py-8 flex items-center justify-between bg-[#0E0E0E] border-b border-white/10">
+          {title && <h2 className="text-[14px] font-mono font-medium text-white/50 tracking-[0.2em] uppercase">{title}</h2>}
           {actionText && (
             <button 
               onClick={onActionClick}
-              className="text-xs font-medium text-[#6B7280] hover:text-[#111111] transition-colors group flex items-center gap-1.5"
+              className="text-[11px] font-mono font-medium text-white/30 hover:text-white transition-all uppercase tracking-widest flex items-center gap-2 group/btn"
             >
               {actionText}
-              <span className="opacity-40 group-hover:opacity-100 transition-opacity">→</span>
+              <ChevronRight size={14} className="opacity-40 group-hover/btn:opacity-100 group-hover/btn:translate-x-0.5 transition-all" />
             </button>
           )}
         </div>
       )}
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto scrollbar-hide">
         <table className="w-full text-left">
           <thead>
-            <tr className="border-b border-[#E5E7EB] bg-[#F9FAFB]/50">
+            <tr className="bg-[#111111]/50">
               {columns.map((column) => (
                 <th 
                   key={column.key}
                   className={cn(
-                    "px-6 py-4 text-[10px] font-medium text-[#6B7280] uppercase tracking-widest",
+                    "px-10 py-6 text-[11px] font-mono font-medium text-white/20 uppercase tracking-[0.2em]",
                     column.className
                   )}
                 >
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-2">
                     {column.header}
-                    {column.sortable && <ArrowUpDown size={12} className="text-[#9CA3AF]" />}
+                    {column.sortable && <ArrowUpDown size={12} className="text-white/10" />}
                   </div>
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#E5E7EB]">
+          <tbody className="divide-y divide-white/5">
             {data.map((item, i) => (
               <tr 
                 key={i}
-                className="hover:bg-[#F9FAFB]/80 transition-colors group cursor-default"
+                className="hover:bg-[#111111] transition-colors group cursor-default"
               >
                 {columns.map((column) => (
                   <td 
                     key={`${i}-${column.key}`}
                     className={cn(
-                      "px-6 py-4 text-sm text-[#111111]",
+                      "px-10 py-7 text-[14px] text-white/70 font-body transition-colors group-hover:text-white font-light",
                       column.className
                     )}
                   >

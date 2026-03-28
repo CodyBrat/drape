@@ -44,7 +44,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center relative px-6 py-12 overflow-hidden font-body antialiased">
+    <div className="min-h-screen bg-black flex flex-col items-center justify-center relative px-6 py-24 overflow-hidden font-body antialiased">
       {/* Background Video & Overlays */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <video 

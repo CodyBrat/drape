@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 const fadeUp = (delay = 0) => ({
@@ -67,13 +68,15 @@ export function CTA() {
               placeholder="YOUR EMAIL ADDRESS" 
               className="bg-transparent border-none outline-none px-6 font-body text-sm text-white placeholder:text-white/20 flex-1 w-full"
             />
-            <motion.button 
-              whileHover={{ scale: 1.02 }} 
-              whileTap={{ scale: 0.97 }}
-              className="bg-white text-black rounded-full px-6 md:px-8 py-3 font-body font-medium text-sm flex items-center justify-center whitespace-nowrap gap-2 shrink-0"
-            >
-              START FOR FREE <ArrowRight size={14} />
-            </motion.button>
+            <Link href="/signup">
+              <motion.button 
+                whileHover={{ scale: 1.02 }} 
+                whileTap={{ scale: 0.97 }}
+                className="bg-white text-black rounded-full px-6 md:px-8 py-3 font-body font-medium text-sm flex items-center justify-center whitespace-nowrap gap-2 shrink-0"
+              >
+                START FOR FREE <ArrowRight size={14} />
+              </motion.button>
+            </Link>
           </div>
           
           <p className="font-mono text-[10px] uppercase tracking-widest text-white/20 mt-6 text-center">
