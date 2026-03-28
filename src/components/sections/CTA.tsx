@@ -79,6 +79,12 @@ export function CTA() {
           <p className="font-mono text-[10px] uppercase tracking-widest text-white/20 mt-6 text-center">
             Join 4,200+ Indian brands on Drape
           </p>
+
+          <div className="mt-16 md:mt-24 w-full h-[1px] relative flex justify-center opacity-50">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-[120px] bg-white/20 blur-[80px] rounded-[100%]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-[60px] bg-white/30 blur-[40px] rounded-[100%]" />
+          </div>
         </motion.div>
       </div>
     </section>

@@ -16,7 +16,7 @@ export function Features() {
   return (
     <div id="features">
       {/* SECTION 5 — STORE BUILDER */}
-      <section className="py-32 md:py-44 border-t border-white/5 px-6">
+      <section className="py-44 md:py-64 border-t border-white/5 px-6">
         <div className="max-w-6xl mx-auto lg:grid lg:grid-cols-2 gap-20 items-center">
           <motion.div {...fadeUp(0)}>
             <Badge>STORE BUILDER</Badge>
@@ -68,7 +68,7 @@ export function Features() {
       </section>
 
       {/* SECTION 6 — PAYMENTS */}
-      <section className="py-32 md:py-44 border-t border-white/5 px-6">
+      <section className="py-44 md:py-64 border-t border-white/5 px-6">
         <div className="max-w-6xl mx-auto lg:grid lg:grid-cols-2 gap-20 items-center lg:flex-row-reverse">
           <motion.div {...fadeUp(0)} className="lg:order-2">
             <Badge>PAYMENTS</Badge>
@@ -114,7 +114,7 @@ export function Features() {
       </section>
 
       {/* SECTION 7 — FULFILLMENT */}
-      <section className="py-32 md:py-44 border-t border-white/5 px-6">
+      <section className="py-44 md:py-64 border-t border-white/5 px-6">
         <div className="max-w-6xl mx-auto lg:grid lg:grid-cols-2 gap-20 items-center">
           <motion.div {...fadeUp(0)}>
             <Badge>FULFILLMENT</Badge>
