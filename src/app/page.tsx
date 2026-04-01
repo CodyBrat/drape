@@ -4,6 +4,7 @@ import { Hero } from "@/components/sections/Hero";
 import { SocialProof } from "@/components/sections/SocialProof";
 import { Stats } from "@/components/sections/Stats";
 import { Features } from "@/components/sections/Features";
+import { FeatureGuide } from "@/components/sections/FeatureGuide";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Pricing } from "@/components/sections/Pricing";
 import { Testimonials } from "@/components/sections/Testimonials";
@@ -16,8 +17,9 @@ export default function Home() {
       <Hero />
       <SocialProof />
       <Stats />
-      <Features />
       <HowItWorks />
+      <FeatureGuide />
+      <Features />
       <Pricing />
       <Testimonials />
       <CTA />

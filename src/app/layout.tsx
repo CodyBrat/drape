@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Serif, Barlow, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ConditionalNavbar } from "@/components/ConditionalNavbar";
+import { SmoothScroll } from "@/components/providers/SmoothScroll";
 
 const instrumentSerif = Instrument_Serif({
   weight: "400",
@@ -37,7 +38,7 @@ export default function RootLayout({
         className={`${instrumentSerif.variable} ${barlow.variable} ${jetbrainsMono.variable} font-body antialiased`}
       >
         <ConditionalNavbar />
-        {children}
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );

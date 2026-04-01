@@ -113,3 +113,19 @@ body {
 .font-mono { font-family: var(--font-mono), monospace; }
 .font-display { font-family: var(--font-display), sans-serif; }
 
+/* Prevent flash of unstyled content */
+.feature-guide-section {
+  contain: layout;
+}
+
+.feature-guide-section .guide-element {
+  will-change: transform;
+}
+
+.feature-marker {
+  will-change: transform, opacity;
+}
+
+.feature-card {
+  will-change: transform, opacity;
+}
