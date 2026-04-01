@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 40 },
@@ -46,10 +45,10 @@ export function Testimonials() {
         <div className="border-b border-white/10 py-32 px-6 lg:px-12">
           <motion.h2 
             {...fadeUp(0)}
-            className="font-[family-name:var(--font-display)] font-bold text-6xl md:text-8xl text-white tracking-tighter leading-[0.85]"
+            className="font-[family-name:var(--font-display)] font-bold text-6xl md:text-8xl text-white tracking-tighter leading-[0.95]"
           >
             CLIENT<br />
-            <span className="text-white/20 italic font-heading">TESTIMONY.</span>
+            <span className="text-white/50 italic font-heading tracking-normal">TESTIMONY.</span>
           </motion.h2>
         </div>
 
@@ -58,12 +57,12 @@ export function Testimonials() {
             <div key={i} className="py-24 lg:py-44 px-6 lg:px-12 group hover:bg-white/[0.02] transition-all">
               <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 items-start">
                 <div className="lg:col-span-3">
-                  <div className="font-mono text-[10px] tracking-[0.4em] text-white/20 uppercase mb-8 flex items-center gap-3">
-                    <span className="w-8 h-px bg-white/20" /> SIGNAL {i + 1}
+                  <div className="font-mono text-[10px] tracking-[0.4em] text-white/50 uppercase mb-8 flex items-center gap-3">
+                    <span className="w-8 h-px bg-white/40" /> SIGNAL {i + 1}
                   </div>
                   <div className="mt-4">
                     <div className="text-white font-bold tracking-tight">{t.name}</div>
-                    <div className="font-heading italic text-white/40 mt-1">{t.role}</div>
+                    <div className="font-heading italic text-white/60 mt-1">{t.role}</div>
                     <div className="font-mono text-[9px] tracking-widest text-[#111111] bg-white px-2 py-0.5 rounded-full inline-block mt-4 uppercase font-black">{t.brand}</div>
                   </div>
                 </div>

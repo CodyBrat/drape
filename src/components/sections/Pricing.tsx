@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 40 },
@@ -54,10 +53,10 @@ export function Pricing() {
         <div className="border-b border-white/10 py-32 px-6 lg:px-12">
           <motion.h2 
             {...fadeUp(0)}
-            className="font-[family-name:var(--font-display)] font-bold text-6xl md:text-8xl text-white tracking-tighter leading-[0.85]"
+            className="font-[family-name:var(--font-display)] font-bold text-6xl md:text-8xl text-white tracking-tighter leading-[0.95]"
           >
             VALUATION<br />
-            <span className="text-white/20 italic font-heading">METRICS.</span>
+            <span className="text-white/50 italic font-heading tracking-normal">METRICS.</span>
           </motion.h2>
         </div>
 
@@ -70,20 +69,20 @@ export function Pricing() {
                  </div>
               )}
               
-              <div className="font-mono text-[10px] tracking-[0.4em] text-white/30 uppercase mb-8">{plan.tier} TIER</div>
+              <div className="font-mono text-[10px] tracking-[0.4em] text-white/50 uppercase mb-8">{plan.tier} TIER</div>
               
               <div className="mb-12">
                 <div className="font-[family-name:var(--font-display)] font-bold text-6xl lg:text-8xl text-white tracking-tighter">
                   {plan.price}
                 </div>
-                <div className="font-heading italic text-xl text-white/40 mt-2">{plan.interval}</div>
+                <div className="font-heading italic text-xl text-white/60 mt-2">{plan.interval}</div>
               </div>
 
               <div className="space-y-6 flex-1 mb-16">
                 {plan.features.map((feature, idx) => (
                   <div key={idx} className="flex items-center gap-4 border-b border-white/5 pb-4 last:border-0 group-hover:border-white/10 transition-colors">
-                    <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
-                    <span className="font-body text-sm lg:text-base text-white/50 group-hover:text-white/80 transition-colors">{feature}</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
+                    <span className="font-body text-sm lg:text-base text-white/70 group-hover:text-white transition-colors">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -103,7 +102,7 @@ export function Pricing() {
         </div>
 
         <div className="border-t border-white/10 py-12 px-6 lg:px-12 text-center bg-white/[0.01]">
-           <p className="font-mono text-[10px] tracking-[0.4em] text-white/20 uppercase">
+           <p className="font-mono text-[10px] tracking-[0.4em] text-white/50 uppercase">
              All deployments include: Global Asset Distribution · Integrated Ledger · Optimized Checkout Node
            </p>
         </div>

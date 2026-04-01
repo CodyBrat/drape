@@ -105,7 +105,7 @@ const HeroSection = () => {
           </span>
         </motion.div>
 
-        <h1 className="mt-8 font-[family-name:var(--font-display)] font-bold text-[clamp(4rem,12vw,12rem)] tracking-tighter leading-[0.9] text-white">
+        <h1 className="mt-8 font-[family-name:var(--font-display)] font-bold text-[clamp(4rem,12vw,12rem)] tracking-tighter leading-[1.05] text-white">
           <BlurText text="BUILDING" className="block" />
           <BlurText text="FOR EVERYONE." className="block" />
         </h1>
@@ -179,17 +179,17 @@ const ManifestoSection = () => {
               {...fadeUp(i * 0.1)}
               className="bg-[#FAFAFA] p-8"
             >
-              <div className="font-mono text-[10px] tracking-widest uppercase text-black/30 mb-4">{item.label}</div>
+              <div className="font-mono text-[10px] tracking-widest uppercase text-black/60 mb-4">{item.label}</div>
               <h3 className="font-[family-name:var(--font-display)] text-2xl font-bold text-black">{item.title}</h3>
-              <p className="font-body font-light text-black/50 text-sm mt-3 leading-relaxed">{item.body}</p>
+              <p className="font-body font-light text-black/70 text-sm mt-3 leading-relaxed">{item.body}</p>
             </motion.div>
           ))}
         </div>
 
         <div className="mt-32 max-w-4xl">
           <motion.div {...fadeUp(0)}>
-            <div className="font-mono text-xs tracking-widest uppercase text-black/30">OUR STORY</div>
-            <p className="mt-6 font-[family-name:var(--font-heading)] italic text-3xl md:text-5xl text-black leading-[1.2] max-w-3xl">
+            <div className="font-mono text-xs tracking-widest uppercase text-black/60">OUR STORY</div>
+            <p className="mt-6 font-[family-name:var(--font-heading)] italic text-3xl md:text-5xl text-black leading-[1.35] max-w-3xl">
               &quot;We built Drape because we were tired of watching brands struggle with tools that were never built for them.&quot;
             </p>
           </motion.div>
@@ -203,7 +203,7 @@ const ManifestoSection = () => {
               <motion.p 
                 key={i} 
                 {...fadeUp(0.2 + i * 0.1)}
-                className="font-body font-light text-black/60 text-lg leading-relaxed"
+                className="font-body font-light text-black/85 text-lg leading-relaxed"
               >
                 {para}
               </motion.p>
@@ -218,12 +218,12 @@ const ManifestoSection = () => {
               <div className="w-16 h-16 rounded-2xl bg-black flex items-center justify-center text-white text-2xl font-bold">P</div>
               <div>
                 <div className="text-xl font-bold text-black">Priyabrata Singh</div>
-                <div className="font-mono text-[10px] text-black/40 tracking-widest uppercase mt-1">Founder, Drape</div>
-                <div className="font-mono text-[10px] text-black/40 mt-1">EST. 2025</div>
+                <div className="font-mono text-[10px] text-black/60 tracking-widest uppercase mt-1">Founder, Drape</div>
+                <div className="font-mono text-[10px] text-black/60 mt-1">EST. 2025</div>
               </div>
             </div>
             <div className="mt-6 pt-6 border-t border-black/5">
-              <p className="font-[family-name:var(--font-heading)] italic text-black/60 text-lg">
+              <p className="font-[family-name:var(--font-heading)] italic text-black/80 text-lg">
                 &quot;If not us, who? If not now, when?&quot;
               </p>
             </div>
@@ -246,8 +246,8 @@ const MarqueeSection = () => {
             "FREE TO START", "BUILT FOR ALL"
           ].map((item, i) => (
             <div key={i} className="flex items-center px-8 border-r border-white/10 last:border-none">
-              <span className="font-mono text-xs tracking-widest uppercase text-white/40 py-4 mr-8">{item}</span>
-              <span className="text-white/20">·</span>
+              <span className="font-mono text-xs tracking-widest uppercase text-white/70 py-4 mr-8">{item}</span>
+              <span className="text-white/50">·</span>
             </div>
           ))}
         </Marquee>

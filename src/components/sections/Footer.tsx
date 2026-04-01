@@ -27,7 +27,7 @@ export function Footer() {
             <Link href="/" className="font-[family-name:var(--font-display)] font-bold text-2xl tracking-tighter text-white">
               DRAPE.
             </Link>
-            <p className="font-heading italic text-white/40 mt-6 text-lg leading-relaxed">
+            <p className="font-heading italic text-white/55 mt-6 text-lg leading-relaxed">
               Architecting the next<br />era of brand creation.
             </p>
             <div className="flex gap-4 mt-8">
@@ -40,38 +40,38 @@ export function Footer() {
           </div>
 
           <div className="p-12 lg:p-16">
-            <h4 className="font-mono text-[10px] tracking-[0.4em] uppercase text-white/20 mb-10">PROTOCOL</h4>
+            <h4 className="font-mono text-[10px] tracking-[0.4em] uppercase text-white/50 mb-10">PROTOCOL</h4>
             <nav className="flex flex-col gap-4">
               {['Features', 'Pricing', 'Infrastructure', 'Node Network'].map((item) => (
-                <Link key={item} href="#" className="font-body text-sm text-white/40 hover:text-white hover:translate-x-1 transition-all">{item}</Link>
+                <Link key={item} href="#" className="font-body text-sm text-white/60 hover:text-white hover:translate-x-1 transition-all">{item}</Link>
               ))}
             </nav>
           </div>
 
           <div className="p-12 lg:p-16">
-            <h4 className="font-mono text-[10px] tracking-[0.4em] uppercase text-white/20 mb-10">ENTITY</h4>
+            <h4 className="font-mono text-[10px] tracking-[0.4em] uppercase text-white/50 mb-10">ENTITY</h4>
             <nav className="flex flex-col gap-4">
               {['About', 'Manifesto', 'Status', 'Archives'].map((item) => (
-                <Link key={item} href={item === 'About' ? '/about' : '#'} className="font-body text-sm text-white/40 hover:text-white hover:translate-x-1 transition-all">{item}</Link>
+                <Link key={item} href={item === 'About' ? '/about' : '#'} className="font-body text-sm text-white/60 hover:text-white hover:translate-x-1 transition-all">{item}</Link>
               ))}
             </nav>
           </div>
 
           <div className="p-12 lg:p-16">
-            <h4 className="font-mono text-[10px] tracking-[0.4em] uppercase text-white/20 mb-10">LEGAL</h4>
+            <h4 className="font-mono text-[10px] tracking-[0.4em] uppercase text-white/50 mb-10">LEGAL</h4>
             <nav className="flex flex-col gap-4">
               {['Privacy Protocol', 'Term Registry', 'Cookie Hash'].map((item) => (
-                <Link key={item} href="#" className="font-body text-sm text-white/40 hover:text-white hover:translate-x-1 transition-all">{item}</Link>
+                <Link key={item} href="#" className="font-body text-sm text-white/60 hover:text-white hover:translate-x-1 transition-all">{item}</Link>
               ))}
             </nav>
           </div>
         </div>
 
         <div className="p-8 lg:p-12 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="font-mono text-[9px] tracking-[0.4em] text-white/20 uppercase">
+          <div className="font-mono text-[9px] tracking-[0.4em] text-white/50 uppercase">
             © 2025 DRAPE PROTOCOL — ALL RIGHTS RESERVED
           </div>
-          <div className="font-mono text-[9px] tracking-[0.4em] text-white/20 uppercase flex gap-8">
+          <div className="font-mono text-[9px] tracking-[0.4em] text-white/50 uppercase flex gap-8">
             <a href="mailto:hello@getdrape.com" className="hover:text-white transition-colors">HELLO@GETDRAPE.COM</a>
             <span className="hidden md:block">BUILD: v0.42.0-STABLE</span>
           </div>

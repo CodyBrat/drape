@@ -25,8 +25,8 @@ export function Stats() {
             </div>
 
             <div className="relative z-10">
-              <div className="font-mono text-[10px] tracking-[0.3em] uppercase text-white/30 mb-8 flex items-center gap-4">
-                <span className="w-8 h-px bg-white/20" /> {stat.label}
+              <div className="font-mono text-[10px] tracking-[0.3em] uppercase text-white/60 mb-8 flex items-center gap-4">
+                <span className="w-8 h-px bg-white/40" /> {stat.label}
               </div>
               
               <motion.div 
@@ -39,7 +39,7 @@ export function Stats() {
                 {stat.value}
               </motion.div>
 
-              <div className="mt-8 font-heading italic text-xl text-white/40">
+              <div className="mt-8 font-heading italic text-xl text-white/70">
                 {stat.detail}
               </div>
             </div>

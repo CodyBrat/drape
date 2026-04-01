@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 40 },
@@ -39,15 +38,15 @@ export function HowItWorks() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-end justify-between gap-12">
           <motion.h2 
             {...fadeUp(0)}
-            className="font-[family-name:var(--font-display)] font-bold text-7xl md:text-9xl text-white tracking-tighter leading-[0.8] max-w-2xl"
+            className="font-[family-name:var(--font-display)] font-bold text-7xl md:text-9xl text-white tracking-tighter leading-[0.95] max-w-2xl"
           >
             THE<br />
-            <span className="text-white/20 italic font-heading">PROTOCOL.</span>
+            <span className="text-white/50 italic font-heading">PROTOCOL.</span>
           </motion.h2>
           
           <motion.p 
             {...fadeUp(0.2)}
-            className="font-mono text-xs tracking-[0.3em] text-white/30 uppercase max-w-xs leading-relaxed"
+            className="font-mono text-xs tracking-[0.3em] text-white/60 uppercase max-w-xs leading-relaxed"
           >
             A triple-node deployment system engineered for maximum brand velocity and zero friction.
           </motion.p>
@@ -69,29 +68,29 @@ export function HowItWorks() {
             <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-32 md:py-48 lg:py-64">
               <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 items-center">
                 <div className="lg:col-span-3">
-                  <div className="font-mono text-[10px] tracking-[0.4em] text-white/20 uppercase mb-4 flex items-center gap-3">
-                    <span className="w-6 h-px bg-white/20" /> PHASE {step.number}
+                  <div className="font-mono text-[10px] tracking-[0.4em] text-white/50 uppercase mb-4 flex items-center gap-3">
+                    <span className="w-6 h-px bg-white/40" /> PHASE {step.number}
                   </div>
                 </div>
                 
                 <div className="lg:col-span-6">
                   <motion.h3 
                     {...fadeUp(0.1)}
-                    className="font-[family-name:var(--font-display)] font-bold text-6xl md:text-[8rem] lg:text-[10rem] text-white tracking-tighter leading-[0.85] mb-8"
+                    className="font-[family-name:var(--font-display)] font-bold text-6xl md:text-[8rem] lg:text-[10rem] text-white tracking-tighter leading-[0.95] mb-8"
                   >
                     {step.title}
                   </motion.h3>
                   
                   <motion.p 
                     {...fadeUp(0.3)}
-                    className="font-body font-light text-white/50 text-xl md:text-2xl lg:text-3xl max-w-2xl leading-relaxed"
+                    className="font-body font-light text-white/85 text-xl md:text-2xl lg:text-3xl max-w-2xl leading-relaxed"
                   >
                     {step.body}
                   </motion.p>
                 </div>
 
                 <div className="lg:col-span-3 flex justify-end">
-                   <div className="font-heading italic text-2xl text-white/20 whitespace-nowrap lg:rotate-90 origin-right lg:translate-x-full">
+                   <div className="font-heading italic text-2xl text-white/40 whitespace-nowrap lg:rotate-90 origin-right lg:translate-x-full">
                      {step.detail}
                    </div>
                 </div>

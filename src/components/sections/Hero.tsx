@@ -69,7 +69,7 @@ export function Hero() {
           <Badge>THE PLATFORM FOR EVERY BRAND</Badge>
         </motion.div>
 
-        <h1 className="mt-8 font-heading italic text-6xl md:text-7xl lg:text-[6.5rem] tracking-tight leading-[1.1] text-white max-w-5xl mx-auto pb-4">
+        <h1 className="mt-8 font-heading italic text-6xl md:text-7xl lg:text-[6.5rem] tracking-tight leading-[1.15] text-white max-w-5xl mx-auto pb-4">
           <BlurText text="Start Your Brand Today." />
         </h1>
 

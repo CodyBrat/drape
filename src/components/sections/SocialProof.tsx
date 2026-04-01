@@ -25,7 +25,7 @@ export function SocialProof() {
         <div className="flex items-center">
           {[...brands, ...brands, ...brands].map((brand, i) => (
             <div key={i} className="flex items-center px-12 border-x border-white/5 h-20">
-              <span className="font-mono text-[10px] tracking-[0.4em] uppercase text-white/30 hover:text-white transition-colors duration-500 cursor-default">
+              <span className="font-mono text-[10px] tracking-[0.4em] uppercase text-white/55 hover:text-white transition-colors duration-500 cursor-default">
                 {brand}
               </span>
             </div>
