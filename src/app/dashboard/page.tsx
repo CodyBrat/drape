@@ -4,12 +4,11 @@ import React, { useEffect, useState } from 'react';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import { StatCard } from '@/components/dashboard/StatCard';
 import { 
-  IndianRupee, 
+  Wallet, 
   ShoppingBag, 
   Users, 
   TrendingUp, 
-  Plus, 
-  Store, 
+  Plus,  
   ArrowRight,
   ChevronRight,
   TrendingDown
@@ -18,7 +17,7 @@ import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const stats = [
-  { label: "Total Revenue", value: "₹1,24,500", change: "+12.5% vs last month", isPositive: true, icon: IndianRupee, variant: 'accent' as const, isMonetary: true },
+  { label: "Total Revenue", value: "₹1,24,500", change: "+12.5% vs last month", isPositive: true, icon: Wallet, variant: 'accent' as const, isMonetary: true },
   { label: "Total Orders", value: "284", change: "+8.2% vs last month", isPositive: true, icon: ShoppingBag, variant: 'default' as const },
   { label: "Store Visitors", value: "12,430", change: "+23.1% vs last month", isPositive: true, icon: Users, variant: 'default' as const },
   { label: "Conversion Rate", value: "2.3%", change: "-0.4% vs last month", isPositive: false, icon: TrendingUp, variant: 'default' as const },
@@ -44,16 +43,19 @@ const topProducts = [
 
 export default function OverviewPage() {
   const [isLoaded, setIsLoaded] = useState(false);
-  useEffect(() => setIsLoaded(true), []);
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <DashboardLayout title="Overview" breadcrumb="Drape / Overview">
       <div className="flex justify-between items-end mb-8">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight text-[#111111]">
-            Good morning, Arjun.
+          <h2 className="text-3xl font-display font-bold tracking-tight text-[#111111]">
+            Good morning, <span className="font-heading italic">Arjun.</span>
           </h2>
-          <p className="text-sm text-[#9CA3AF] mt-1 font-medium tracking-wide uppercase">
+          <p className="text-[10px] font-mono text-[#9CA3AF] mt-2 font-bold tracking-[0.2em] uppercase">
             Monday, 2 December 2025
           </p>
         </div>
@@ -79,7 +81,7 @@ export default function OverviewPage() {
           {/* Revenue Chart */}
           <section className="bg-white border border-[#E5E7EB] rounded-2xl p-8 hover:shadow-lg transition-all duration-500 shadow-sm relative overflow-hidden group">
             <div className="flex items-center justify-between mb-10">
-              <h3 className="font-semibold text-[#111111] flex items-center gap-2">
+              <h3 className="font-display font-bold text-[#111111] flex items-center gap-2">
                 Revenue This Week
                 <ChevronRight size={16} className="text-[#9CA3AF]" />
               </h3>
@@ -165,7 +167,7 @@ export default function OverviewPage() {
         <div className="lg:col-span-1 space-y-4">
           {/* Top Products Card */}
           <section className="bg-white border border-[#E5E7EB] rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-500">
-            <h3 className="font-semibold text-[#111111] mb-2">Top Products</h3>
+            <h3 className="font-display font-bold text-[#111111] mb-2">Top Products</h3>
             <p className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-widest">By Revenue</p>
             
             <div className="mt-8 space-y-6">
@@ -195,7 +197,7 @@ export default function OverviewPage() {
           <section className="bg-[#111111] rounded-2xl p-6 shadow-xl shadow-black/10">
             <div className="grid grid-cols-2 gap-6">
               {[
-                { label: "Avg Ticket", val: "₹438", icon: IndianRupee },
+                { label: "Avg Ticket", val: "₹438", icon: Wallet },
                 { label: "Return Rate", val: "2.1%", icon: TrendingDown },
                 { label: "Repeat Cust.", val: "34%", icon: Users },
                 { label: "Fulfillment", val: "3.2d", icon: ShoppingBag },

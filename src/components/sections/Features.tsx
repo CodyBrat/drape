@@ -74,13 +74,13 @@ export function Features() {
             <Badge>PAYMENTS</Badge>
             <h2 className="mt-8 font-heading italic text-4xl md:text-5xl lg:text-6xl tracking-tight leading-[0.9] text-white">
               Every way<br />
-              <span className="text-white/40">Indians pay.</span>
+              <span className="text-white/40">Customers pay.</span>
             </h2>
             <p className="mt-6 font-body font-light text-white/50 text-base max-w-sm">
-              UPI, cards, net banking, wallets, and cash on delivery — all built in. No Stripe. No PayPal. Just Razorpay, the way India actually pays.
+              UPI, cards, net banking, wallets, and cash on delivery — all built in. Integrated with Razorpay, built for every brand and every customer.
             </p>
             <div className="mt-8 space-y-3">
-              {['UPI & QR payments', 'Cash on delivery', 'Instant INR payouts', 'Zero transaction fees on paid plans'].map((feature, i) => (
+              {['UPI & QR payments', 'Cash on delivery', 'Instant payouts', 'Zero transaction fees on paid plans'].map((feature, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <div className="w-1 h-1 rounded-full bg-white/30" />
                   <span className="font-body text-sm text-white/60">{feature}</span>
@@ -123,10 +123,10 @@ export function Features() {
               Ship. <span className="text-white/40">Repeat.</span>
             </h2>
             <p className="mt-6 font-body font-light text-white/50 text-base max-w-sm">
-              We connect your store to Indian print partners. Upload your design, set your price, and we handle everything from printing to your customer&apos;s doorstep.
+              We connect your store to premium print partners. Upload your design, set your price, and we handle everything from printing to your customer&apos;s doorstep.
             </p>
             <div className="mt-8 space-y-3">
-              {['Indian print partners', '2-5 day delivery', 'Flat ₹80 shipping', 'Real-time order tracking'].map((feature, i) => (
+              {['Premium print partners', '2-5 day delivery', 'Flat rate shipping', 'Real-time order tracking'].map((feature, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <div className="w-1 h-1 rounded-full bg-white/30" />
                   <span className="font-body text-sm text-white/60">{feature}</span>

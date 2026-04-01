@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { LucideIcon, ArrowUpRight, TrendingUp, TrendingDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { motion, useSpring, useTransform, animate } from 'framer-motion';
+import { motion,animate } from 'framer-motion';
 
 interface StatCardProps {
   label: string;
@@ -50,7 +50,6 @@ export function StatCard({
   value, 
   change, 
   isPositive, 
-  icon: Icon, 
   variant = 'default',
   isMonetary
 }: StatCardProps) {

@@ -66,7 +66,7 @@ export function Hero() {
 
       <div className="flex flex-col items-center text-center z-10 w-full max-w-6xl mx-auto">
         <motion.div {...fadeUp(0)}>
-          <Badge>THE PLATFORM FOR INDIAN BRANDS</Badge>
+          <Badge>THE PLATFORM FOR EVERY BRAND</Badge>
         </motion.div>
 
         <h1 className="mt-8 font-heading italic text-6xl md:text-7xl lg:text-[6.5rem] tracking-tight leading-[1.1] text-white max-w-5xl mx-auto pb-4">

@@ -1,22 +1,18 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import { StatCard } from '@/components/dashboard/StatCard';
 import { cn } from '@/lib/utils';
 import { 
   Plus, 
   Search, 
-  Filter, 
   LayoutGrid, 
   List, 
   Trash2, 
   Edit3, 
-  ChevronRight,
-  Package,
   X,
   Camera,
-  Layers,
   Check
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -59,10 +55,10 @@ export default function ProductsPage() {
     <DashboardLayout title="Products" breadcrumb="Drape / Products">
       <div className="flex justify-between items-end mb-8">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight text-[#111111]">
+          <h2 className="text-3xl font-display font-bold tracking-tight text-[#111111]">
             Products
           </h2>
-          <p className="text-sm text-[#9CA3AF] mt-1 font-medium tracking-wide uppercase">
+          <p className="text-[10px] font-mono text-[#9CA3AF] mt-2 font-bold tracking-[0.2em] uppercase">
             Manage your store inventory
           </p>
         </div>
@@ -140,7 +136,7 @@ export default function ProductsPage() {
             exit={{ opacity: 0, scale: 0.98 }}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6"
           >
-            {productsData.map((p, i) => (
+            {productsData.map((p) => (
               <motion.div 
                 key={p.id}
                 whileHover={{ y: -4, borderColor: "#111111" }}
@@ -159,7 +155,7 @@ export default function ProductsPage() {
                 </div>
 
                 <div className="p-5">
-                  <h3 className="text-sm font-bold text-[#111111] truncate uppercase tracking-tight">{p.name}</h3>
+                  <h3 className="text-sm font-display font-bold text-[#111111] truncate uppercase tracking-tight">{p.name}</h3>
                   <div className="flex justify-between items-center mt-3">
                     <span className="text-lg font-bold text-[#111111]">{p.price}</span>
                     <span className={cn(
@@ -263,7 +259,7 @@ export default function ProductsPage() {
               className="relative bg-white rounded-[40px] p-10 w-full max-w-2xl max-h-[85vh] overflow-y-auto scrollbar-hide shadow-2xl"
             >
               <div className="flex items-center justify-between mb-10">
-                <h3 className="text-2xl font-bold tracking-tight text-[#111111]">Add New Product</h3>
+                <h3 className="text-2xl font-display font-bold tracking-tight text-[#111111]">Add New Product</h3>
                 <button onClick={() => setIsModalOpen(false)} className="p-2.5 hover:bg-[#F5F5F5] rounded-full transition-all text-[#9CA3AF] hover:text-[#111111]">
                   <X size={20} />
                 </button>

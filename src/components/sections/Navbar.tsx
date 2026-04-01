@@ -33,8 +33,8 @@ export function Navbar() {
         className={cn(
           "flex items-center justify-between gap-8 px-6 py-3 rounded-full transition-all duration-500",
           (scrolled || isDashboard) 
-            ? "bg-black/60 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]" 
-            : "bg-white/5 backdrop-blur-md border border-white/5"
+            ? "bg-black border border-white/10" 
+            : "bg-white/5 border border-white/5"
         )}
       >
         <Link href="/" className="font-mono text-white font-bold text-sm tracking-widest mr-4">
@@ -48,8 +48,8 @@ export function Navbar() {
           <Link href="/#pricing" className="font-body text-[13px] text-white/50 hover:text-white transition-colors">
             Pricing
           </Link>
-          <Link href="/#brands" className="font-body text-[13px] text-white/50 hover:text-white transition-colors">
-            Brands
+          <Link href="/about" className="font-body text-[13px] text-white/50 hover:text-white transition-colors">
+            About
           </Link>
         </div>
         

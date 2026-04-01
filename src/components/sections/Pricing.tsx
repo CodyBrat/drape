@@ -146,7 +146,7 @@ export function Pricing() {
           className="mt-12 text-center"
         >
           <p className="font-mono text-xs tracking-widest text-white/20 leading-relaxed uppercase">
-            All plans include: Razorpay payments · UPI + COD · Indian fulfillment · Mobile-optimized storefront
+            All plans include: Razorpay payments · UPI + COD · Priority fulfillment · Mobile-optimized storefront
           </p>
         </motion.div>
       </div>

@@ -80,7 +80,7 @@ export function CTA() {
           </div>
           
           <p className="font-mono text-[10px] uppercase tracking-widest text-white/20 mt-6 text-center">
-            Join 4,200+ Indian brands on Drape
+            Join 4,200+ brands on Drape
           </p>
 
           <div className="mt-16 md:mt-24 w-full h-[1px] relative flex justify-center opacity-50">

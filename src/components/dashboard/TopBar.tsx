@@ -1,8 +1,8 @@
 "use client";
 
 import React from 'react';
-import { Bell, Search, User } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Bell, Search, ChevronLeft } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 interface TopBarProps {
   title: string;
@@ -10,16 +10,27 @@ interface TopBarProps {
 }
 
 export function TopBar({ title, breadcrumb = "Drape / Overview" }: TopBarProps) {
+  const router = useRouter();
+
   return (
     <header className="h-[64px] bg-white border-b border-[#E5E7EB] px-8 sticky top-0 z-10 flex items-center justify-between shrink-0 font-body">
-      {/* LEFT: TITLE & BREADCRUMB */}
-      <div className="flex flex-col">
-        <h1 className="text-xl font-semibold text-[#111111] leading-none tracking-tight">
-          {title}
-        </h1>
-        <p className="text-[10px] font-medium text-[#9CA3AF] mt-1.5 uppercase tracking-[0.2em]">
-          {breadcrumb}
-        </p>
+      {/* LEFT: BACK BUTTON + TITLE & BREADCRUMB */}
+      <div className="flex items-center gap-6">
+        <button 
+          onClick={() => router.back()}
+          className="w-10 h-10 rounded-xl bg-[#F5F5F5] border border-transparent hover:border-[#E5E7EB] flex items-center justify-center transition-all group hover:bg-[#EEEEEE] active:scale-90"
+        >
+          <ChevronLeft size={20} className="text-[#6B7280] group-hover:text-[#111111] transition-colors" />
+        </button>
+        
+        <div className="flex flex-col">
+          <h1 className="text-xl font-semibold text-[#111111] leading-none tracking-tight">
+            {title}
+          </h1>
+          <p className="text-[10px] font-medium text-[#9CA3AF] mt-1.5 uppercase tracking-[0.2em]">
+            {breadcrumb}
+          </p>
+        </div>
       </div>
 
       {/* RIGHT: ACTIONS */}

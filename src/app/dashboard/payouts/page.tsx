@@ -2,21 +2,18 @@
 
 import React, { useState, useEffect } from 'react';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
-import { StatCard } from '@/components/dashboard/StatCard';
 import { cn } from '@/lib/utils';
 import { 
-  Wallet, 
-  IndianRupee, 
+  Wallet,  
   Clock, 
-  Download, 
-  ShieldCheck, 
+  Download,
   CreditCard, 
   ArrowRight,
   TrendingUp,
   ChevronRight,
-  ChevronDown
+  CheckCircle2
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 interface Payout {
   id: string;
@@ -39,13 +36,16 @@ export default function PayoutsPage() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [autoPayout, setAutoPayout] = useState(true);
 
-  useEffect(() => setIsLoaded(true), []);
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
 
-  const stats = [
-    { label: "Available Liquid", value: "₹8,240", change: "Updated just now", isPositive: true, variant: 'accent' as const, icon: Wallet },
-    { label: "Total Asset Generation", value: "₹1,24,500", change: "+15.8% vs last month", isPositive: true, icon: IndianRupee },
-    { label: "Pending Settlement", value: "₹21,450", change: "Awaiting Clearance", isPositive: true, icon: Clock },
-  ];
+  // const stats = [
+  //   { label: "Available Liquid", value: "₹8,240", change: "Updated just now", isPositive: true, variant: 'accent' as const, icon: Wallet },
+  //   { label: "Total Asset Generation", value: "₹1,24,500", change: "+15.8% vs last month", isPositive: true, icon: IndianRupee },
+  //   { label: "Pending Settlement", value: "₹21,450", change: "Awaiting Clearance", isPositive: true, icon: Clock },
+  // ];
 
   return (
     <DashboardLayout title="Payouts" breadcrumb="Drape / Payouts">
@@ -62,9 +62,10 @@ export default function PayoutsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* CARD 1: ACCENT LARGE */}
-        <div className="lg:col-span-1 bg-[#111111] text-white rounded-[40px] p-10 flex flex-col justify-between shadow-2xl relative overflow-hidden group">
-          <div className="absolute top-0 right-0 p-12 opacity-10 text-white pointer-events-none">
-             <Wallet size={160} strokeWidth={1} />
+        <div className="lg:col-span-1 bg-[#111111] text-white rounded-[40px] p-10 flex flex-col justify-between shadow-2xl relative overflow-hidden group border border-white/5">
+          <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
+          <div className="absolute top-0 right-0 p-12 opacity-10 text-white pointer-events-none group-hover:scale-110 transition-transform duration-700">
+             <Wallet size={160} strokeWidth={0.5} />
           </div>
           <div className="relative z-10">
              <span className="text-[11px] font-mono font-bold text-white/40 tracking-[0.3em] uppercase mb-4 block">Liquid Authority</span>
@@ -75,18 +76,18 @@ export default function PayoutsPage() {
           </div>
 
           <div className="mt-12 space-y-4">
-             <div className="flex items-center gap-4 bg-white/5 border border-white/5 rounded-2xl p-4">
-                <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center text-white/60">
+              <div className="flex items-center gap-4 bg-white/5 border border-white/5 rounded-2xl p-4 backdrop-blur-md">
+                <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-white/80">
                    <CreditCard size={20} />
                 </div>
                 <div className="flex flex-col">
-                   <span className="text-xs font-bold">SBI ****4521</span>
-                   <span className="text-[9px] font-mono font-bold text-white/40 uppercase tracking-widest">Verified Target Mark</span>
+                   <span className="text-sm font-bold">SBI ****4521</span>
+                   <span className="text-[9px] font-mono font-bold text-white/40 uppercase tracking-widest mt-0.5">Verified Target Mark</span>
                 </div>
-                <div className="ml-auto bg-white/10 px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-widest">PRIMARY</div>
+                <div className="ml-auto bg-white/20 px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-widest border border-white/10">PRIMARY</div>
              </div>
 
-             <button className="relative z-10 w-full py-5 bg-white text-black rounded-2xl font-mono font-bold text-[11px] tracking-[0.2em] uppercase hover:bg-white/90 active:scale-95 transition-all shadow-xl shadow-black/10 flex items-center justify-center gap-3 group/btn">
+             <button className="relative z-10 w-full py-5 bg-white text-black rounded-2xl font-mono font-bold text-[11px] tracking-[0.2em] uppercase hover:bg-[#FAFAFA] active:scale-[0.98] transition-all shadow-xl shadow-black/10 flex items-center justify-center gap-3 group/btn">
                 Withdraw Authority <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
              </button>
           </div>
@@ -152,9 +153,9 @@ export default function PayoutsPage() {
       {/* PAYOUT HISTORY */}
       <div className="mt-8 bg-white border border-[#E5E7EB] rounded-[48px] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700">
         <div className="px-12 py-10 border-b border-[#F5F5F5] flex items-center justify-between">
-           <h3 className="text-sm font-black text-[#111111] uppercase tracking-[0.4em]">Settlement Matrix</h3>
+           <h3 className="text-sm font-display font-bold text-[#111111] uppercase tracking-[0.4em]">Settlement Matrix</h3>
            <div className="flex items-center gap-2 text-[#9CA3AF] hover:text-[#111111] transition-colors cursor-pointer group">
-              <span className="text-[10px] font-bold uppercase tracking-widest">Global Log</span>
+              <span className="text-[10px] font-bold uppercase tracking-widest">Activity Log</span>
               <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
            </div>
         </div>

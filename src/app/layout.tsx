@@ -22,7 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Drape — Built for Indian Brands",
+  title: "Drape — Built for Every Brand",
   description: "Start your brand in 5 minutes. We handle everything.",
 };
 

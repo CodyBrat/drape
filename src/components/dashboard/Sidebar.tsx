@@ -9,7 +9,6 @@ import {
   ShoppingBag, 
   BarChart2, 
   Wallet, 
-  Settings, 
   ChevronDown,
   Search,
   Sparkles,
@@ -18,7 +17,7 @@ import {
   Settings2
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion} from 'framer-motion';
 import { useAuthStore } from '@/lib/store';
 
 const navSections = [

@@ -5,7 +5,7 @@ import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import { StatCard } from '@/components/dashboard/StatCard';
 import { cn } from '@/lib/utils';
 import { 
-  IndianRupee, 
+  Wallet, 
   ShoppingBag, 
   Users, 
   TrendingUp, 

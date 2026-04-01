@@ -18,9 +18,6 @@ export default function DashboardLayout({
   children, 
   title, 
   breadcrumb,
-  showActionButton, 
-  actionText, 
-  onActionClick 
 }: DashboardLayoutProps) {
   return (
     <div className="flex h-screen bg-[#F5F5F5] text-[#111111] overflow-hidden font-body selection:bg-black selection:text-white antialiased">

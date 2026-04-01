@@ -48,7 +48,7 @@ export function HowItWorks() {
             </div>
             <h3 className="font-heading italic text-2xl text-white">Add your products.</h3>
             <p className="font-body font-light text-sm text-white/50 mt-3 flex-1">
-              Upload your designs. Set your prices. We connect you to Indian print partners for fulfillment.
+              Upload your designs. Set your prices. We connect you to premium print partners for fulfillment.
             </p>
             <div className="liquid-glass rounded-xl p-4 mt-6 h-40 flex flex-col items-center justify-center gap-3 border border-white/5 border-dashed">
               <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">

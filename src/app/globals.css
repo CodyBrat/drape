@@ -4,9 +4,11 @@
   --font-heading: var(--font-heading);
   --font-body: var(--font-body);
   --font-mono: var(--font-mono);
+  --font-display: var(--font-display);
 }
 
 :root {
+  --font-display: 'Space Grotesk', sans-serif;
   --background: 0 0% 0%;           /* Pure black */
   --foreground: 0 0% 100%;         /* Pure white */
   --card: 0 0% 5%;
@@ -104,3 +106,10 @@ body {
   mask-composite: exclude;
   pointer-events: none;
 }
+
+/* Font Utilities */
+.font-heading { font-family: var(--font-heading), serif; }
+.font-body { font-family: var(--font-body), sans-serif; }
+.font-mono { font-family: var(--font-mono), monospace; }
+.font-display { font-family: var(--font-display), sans-serif; }
+

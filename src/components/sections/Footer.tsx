@@ -22,7 +22,7 @@ export function Footer() {
               DRAPE.
             </Link>
             <p className="font-body font-light text-sm text-white/30 mt-2">
-              Built for Indian brands.
+              Built for brands.
             </p>
             
             <div className="flex gap-3 mt-6">
@@ -52,7 +52,10 @@ export function Footer() {
           <div>
             <h4 className="font-mono text-[10px] tracking-widest uppercase text-white/25 mb-4">COMPANY</h4>
             <div className="space-y-3 flex flex-col">
-              {['About', 'Blog', 'Careers', 'Press'].map((link, i) => (
+              <Link href="/about" className="font-body text-sm text-white/40 hover:text-white/80 transition-colors">
+                About
+              </Link>
+              {['Blog', 'Careers', 'Press'].map((link, i) => (
                 <Link key={i} href="#" className="font-body text-sm text-white/40 hover:text-white/80 transition-colors">
                   {link}
                 </Link>
@@ -75,7 +78,7 @@ export function Footer() {
 
         <div className="border-t border-white/5 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="font-mono text-[10px] uppercase tracking-widest text-white/20">
-            © 2025 Drape Technologies. Made in India 🇮🇳
+            © 2025 Drape Technologies. Built with care.
           </p>
           <a href="mailto:hello@getdrape.in" className="font-mono text-[10px] tracking-widest text-white/20 hover:text-white transition-colors">
             HELLO@GETDRAPE.IN
