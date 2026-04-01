@@ -24,12 +24,12 @@ interface Payout {
 }
 
 const payoutsData: Payout[] = [
-  { id: "PAY-1089", amount: "₹12,400", status: "Completed", bank: "SBI ****4521", date: "Nov 1, 2025" },
-  { id: "PAY-1088", amount: "₹8,200", status: "Completed", bank: "SBI ****4521", date: "Oct 1, 2025" },
-  { id: "PAY-1087", amount: "₹15,100", status: "Completed", bank: "SBI ****4521", date: "Sep 1, 2025" },
-  { id: "PAY-1086", amount: "₹5,400", status: "Completed", bank: "SBI ****4521", date: "Aug 1, 2025" },
-  { id: "PAY-1085", amount: "₹9,800", status: "Completed", bank: "SBI ****4521", date: "Jul 1, 2025" },
-  { id: "PAY-1084", amount: "₹11,200", status: "Failed", bank: "SBI ****4521", date: "Jun 1, 2025" },
+  { id: "PAY-1089", amount: "$12,400", status: "Completed", bank: "BANK ****4521", date: "Nov 1, 2025" },
+  { id: "PAY-1088", amount: "$8,200", status: "Completed", bank: "BANK ****4521", date: "Oct 1, 2025" },
+  { id: "PAY-1087", amount: "$15,100", status: "Completed", bank: "BANK ****4521", date: "Sep 1, 2025" },
+  { id: "PAY-1086", amount: "$5,400", status: "Completed", bank: "BANK ****4521", date: "Aug 1, 2025" },
+  { id: "PAY-1085", amount: "$9,800", status: "Completed", bank: "BANK ****4521", date: "Jul 1, 2025" },
+  { id: "PAY-1084", amount: "$11,200", status: "Failed", bank: "BANK ****4521", date: "Jun 1, 2025" },
 ];
 
 export default function PayoutsPage() {
@@ -42,9 +42,9 @@ export default function PayoutsPage() {
   }, []);
 
   // const stats = [
-  //   { label: "Available Liquid", value: "₹8,240", change: "Updated just now", isPositive: true, variant: 'accent' as const, icon: Wallet },
-  //   { label: "Total Asset Generation", value: "₹1,24,500", change: "+15.8% vs last month", isPositive: true, icon: IndianRupee },
-  //   { label: "Pending Settlement", value: "₹21,450", change: "Awaiting Clearance", isPositive: true, icon: Clock },
+  //   { label: "Available Liquid", value: "$8,240", change: "Updated just now", isPositive: true, variant: 'accent' as const, icon: Wallet },
+  //   { label: "Total Asset Generation", value: "$1,24,500", change: "+15.8% vs last month", isPositive: true, icon: IndianRupee },
+  //   { label: "Pending Settlement", value: "$21,450", change: "Awaiting Clearance", isPositive: true, icon: Clock },
   // ];
 
   return (
@@ -69,7 +69,7 @@ export default function PayoutsPage() {
           </div>
           <div className="relative z-10">
              <span className="text-[11px] font-mono font-bold text-white/40 tracking-[0.3em] uppercase mb-4 block">Liquid Authority</span>
-             <h2 className="text-5xl font-heading italic text-white tracking-tighter">₹8,240</h2>
+             <h2 className="text-5xl font-heading italic text-white tracking-tighter">$8,240</h2>
              <p className="text-[11px] font-mono text-white/20 mt-8 tracking-widest uppercase flex items-center gap-2">
                 <CheckCircle2 size={12} className="text-emerald-400" /> Cleared for instant withdrawal
              </p>
@@ -81,7 +81,7 @@ export default function PayoutsPage() {
                    <CreditCard size={20} />
                 </div>
                 <div className="flex flex-col">
-                   <span className="text-sm font-bold">SBI ****4521</span>
+                   <span className="text-sm font-bold">BANK ****4521</span>
                    <span className="text-[9px] font-mono font-bold text-white/40 uppercase tracking-widest mt-0.5">Verified Target Mark</span>
                 </div>
                 <div className="ml-auto bg-white/20 px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-widest border border-white/10">PRIMARY</div>
@@ -97,7 +97,7 @@ export default function PayoutsPage() {
         <div className="lg:col-span-1 bg-white border border-[#E5E7EB] rounded-[40px] p-10 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col justify-between group">
            <div className="relative z-10">
               <span className="text-[11px] font-mono font-bold text-[#9CA3AF] tracking-[0.3em] uppercase mb-4 block">Asset Accumulation</span>
-              <h2 className="text-5xl font-heading italic text-[#111111] tracking-tighter">₹1,24,500</h2>
+              <h2 className="text-5xl font-heading italic text-[#111111] tracking-tighter">$1,24,500</h2>
               <div className="flex items-center gap-2 mt-8 text-[#10B981] font-mono font-bold text-[11px] uppercase tracking-widest bg-emerald-500/10 px-3 py-1.5 rounded-full w-fit">
                  <TrendingUp size={14} /> +15.8% Growth Velocity
               </div>
@@ -123,7 +123,7 @@ export default function PayoutsPage() {
         <div className="lg:col-span-1 bg-white border border-[#E5E7EB] rounded-[40px] p-10 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col justify-between">
            <div className="relative z-10">
               <span className="text-[11px] font-mono font-bold text-[#9CA3AF] tracking-[0.3em] uppercase mb-4 block">Incoming Cycle</span>
-              <h2 className="text-5xl font-heading italic text-[#111111] tracking-tighter">₹21,450</h2>
+              <h2 className="text-5xl font-heading italic text-[#111111] tracking-tighter">$21,450</h2>
               <p className="text-[11px] font-mono font-bold text-[#6B7280] mt-8 tracking-widest uppercase flex items-center gap-2">
                  <Clock size={14} /> Scheduled · Dec 15, 2025
               </p>

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { LucideIcon, ArrowUpRight, TrendingUp, TrendingDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { motion,animate } from 'framer-motion';
+import { motion, animate } from 'framer-motion';
 
 interface StatCardProps {
   label: string;
@@ -18,8 +18,8 @@ interface StatCardProps {
 function Counter({ value, isMonetary }: { value: string, isMonetary?: boolean }) {
   const [displayValue, setDisplayValue] = useState(0);
   
-  // Extract number from string (remove ₹ and ,)
-  const numericValue = parseFloat(value.replace(/[₹,]/g, '')) || 0;
+  // Extract number from string (remove $ and ,)
+  const numericValue = parseFloat(value.replace(/[$,]/g, '')) || 0;
   const isPercentage = value.includes('%');
   const isTime = value.includes('m') || value.includes('s');
 
@@ -39,7 +39,7 @@ function Counter({ value, isMonetary }: { value: string, isMonetary?: boolean })
     formatted = `${displayValue.toFixed(1)}%`;
   } else {
     formatted = Math.floor(displayValue).toLocaleString();
-    if (isMonetary) formatted = `₹${formatted}`;
+    if (isMonetary) formatted = `$${formatted}`;
   }
 
   return <span>{formatted}</span>;

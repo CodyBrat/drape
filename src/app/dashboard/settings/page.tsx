@@ -61,7 +61,7 @@ export default function SettingsPage() {
                   <div className="space-y-3">
                      <label className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-widest ml-1">Public Endpoint</label>
                      <div className="flex items-center gap-2 bg-[#F5F5F5] border border-[#E5E7EB] rounded-2xl px-5 py-4 text-sm font-mono text-[#9CA3AF] cursor-not-allowed shadow-inner transition-all group-hover:bg-[#EEEEEE]">
-                        mystore.drape.in
+                        mystore.getdrape.com
                         <ArrowUpRight size={14} className="ml-auto text-[#E5E7EB] group-hover:text-[#9CA3AF] transition-colors" />
                      </div>
                   </div>
@@ -69,7 +69,7 @@ export default function SettingsPage() {
                      <label className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-widest ml-1">Creative Mission</label>
                      <textarea 
                         rows={4}
-                        defaultValue="Premium streetwear and oversized apparel for the modern era. Designed in Mumbai, inspired by the noise."
+                        defaultValue="Premium streetwear and oversized apparel for the modern era. Designed with precision, inspired by the noise."
                         className="w-full bg-[#F5F5F5] border border-transparent focus:border-[#E5E7EB] focus:bg-white rounded-2xl px-5 py-4 text-sm font-medium text-[#111111] focus:outline-none transition-all shadow-inner resize-none leading-relaxed"
                      />
                   </div>

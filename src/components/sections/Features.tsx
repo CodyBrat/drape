@@ -1,169 +1,177 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "lucide-react";
 
 const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 24 },
+  initial: { opacity: 0, y: 40 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-80px" },
-  transition: { duration: 0.7, delay, ease: [0.25, 0, 0, 1] as const }
+  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] as const }
 });
+
+const SectionLabel = ({ number, text }: { number: string, text: string }) => (
+  <div className="flex items-center gap-6 mb-12">
+    <span className="font-mono text-xs tracking-[0.4em] text-white/20 whitespace-nowrap">{number}</span>
+    <div className="h-px w-full bg-white/10" />
+    <span className="font-mono text-xs tracking-[0.4em] text-white/20 whitespace-nowrap">{text}</span>
+  </div>
+);
 
 export function Features() {
   return (
-    <div id="features">
-      {/* SECTION 5 — STORE BUILDER */}
-      <section className="py-44 md:py-64 border-t border-white/5 px-6">
-        <div className="max-w-6xl mx-auto lg:grid lg:grid-cols-2 gap-20 items-center">
-          <motion.div {...fadeUp(0)}>
-            <Badge>STORE BUILDER</Badge>
-            <h2 className="mt-8 font-heading italic text-4xl md:text-5xl lg:text-6xl tracking-tight leading-[0.9] text-white">
-              Your store.<br />
-              <span className="text-white/40">Your rules.</span>
-            </h2>
-            <p className="mt-6 font-body font-light text-white/50 text-base max-w-sm">
-              Beautiful templates built specifically for fashion brands. Customize everything — colors, fonts, layout. No coding needed.
-            </p>
-            <div className="mt-8 space-y-3">
-              {['Fashion-first templates', 'Custom domain support', 'Mobile-first design', 'Live preview while editing'].map((feature, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div className="w-1 h-1 rounded-full bg-white/30" />
-                  <span className="font-body text-sm text-white/60">{feature}</span>
-                </div>
-              ))}
-            </div>
-            <Button variant="primary" className="mt-8">
-              Start Building <ArrowUpRight size={14} />
-            </Button>
-          </motion.div>
+    <div id="features" className="bg-black">
+      {/* 01 — THE INTERFACE */}
+      <section className="relative min-h-screen py-32 md:py-48 px-6 lg:px-12 border-t border-white/10 overflow-hidden">
+        {/* BACKGROUND TEXTURE */}
+        <div 
+          className="absolute left-[-5%] top-[10%] font-[family-name:var(--font-display)] font-bold text-[25vw] leading-none text-white/[0.02] pointer-events-none select-none z-0"
+          style={{ letterSpacing: "-0.05em" }}
+        >
+          STORE
+        </div>
 
-          <motion.div {...fadeUp(0.3)} className="mt-16 lg:mt-0">
-            <div className="liquid-glass rounded-3xl p-6 aspect-4/3 flex flex-col">
-              <div className="flex items-center gap-2 mb-6">
-                <div className="flex gap-1.5 border-r border-white/10 pr-4">
-                  <div className="w-2 h-2 rounded-full bg-white/20" />
-                  <div className="w-2 h-2 rounded-full bg-white/20" />
-                  <div className="w-2 h-2 rounded-full bg-white/20" />
-                </div>
-                <div className="liquid-glass rounded-full px-3 py-1 flex-1 max-w-[200px] flex justify-center">
-                  <span className="font-mono text-[10px] text-white/30 tracking-widest">mystore.drape.in</span>
-                </div>
-              </div>
-              
-              <div 
-                className="flex-1 rounded-2xl border border-white/5 relative flex items-center justify-center overflow-hidden"
-                style={{
-                  backgroundImage: "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
-                  backgroundSize: "20px 20px"
-                }}
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <SectionLabel number="01" text="THE INTERFACE" />
+          
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+            <div className="lg:col-span-7">
+              <motion.h2 
+                {...fadeUp(0)}
+                className="font-[family-name:var(--font-display)] font-bold text-6xl md:text-8xl lg:text-9xl text-white tracking-tighter leading-[0.85] mb-12"
               >
-                <span className="font-mono text-white/10 text-xs tracking-widest">STORE PREVIEW</span>
-              </div>
+                YOUR STORE.<br />
+                <span className="text-white/20 italic font-heading pb-4 block">YOUR AUTHORITY.</span>
+              </motion.h2>
+              
+              <motion.p 
+                {...fadeUp(0.2)}
+                className="font-body font-light text-white/40 text-lg md:text-xl max-w-xl leading-relaxed mb-12"
+              >
+                Zero-code architecture for the modern creator. Build an endpoint that reflects your brand&apos;s DNA, not a template&apos;s constraints.
+              </motion.p>
             </div>
-          </motion.div>
+
+            <div className="lg:col-span-5 pt-12 lg:pt-0">
+               <motion.div 
+                 {...fadeUp(0.4)}
+                 className="grid grid-cols-1 gap-px bg-white/10 border border-white/10"
+               >
+                 {[
+                   { title: "Dynamic Themes", body: "Engineered for fashion retail." },
+                   { title: "Protocol Agnostic", body: "Connect any global domain." },
+                   { title: "Mobile Core", body: "Optimized for high-speed commerce." },
+                   { title: "Live Synthesis", body: "Real-time visual manifest editor." }
+                 ].map((feat, i) => (
+                   <div key={i} className="bg-black p-8 group hover:bg-white/[0.02] transition-colors">
+                     <h4 className="font-mono text-[10px] tracking-widest text-white/30 uppercase mb-2">SYSTEM.{i + 1}</h4>
+                     <h3 className="text-xl font-bold text-white mb-2">{feat.title}</h3>
+                     <p className="text-sm text-white/40 font-body leading-relaxed">{feat.body}</p>
+                   </div>
+                 ))}
+               </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* SECTION 6 — PAYMENTS */}
-      <section className="py-44 md:py-64 border-t border-white/5 px-6">
-        <div className="max-w-6xl mx-auto lg:grid lg:grid-cols-2 gap-20 items-center lg:flex-row-reverse">
-          <motion.div {...fadeUp(0)} className="lg:order-2">
-            <Badge>PAYMENTS</Badge>
-            <h2 className="mt-8 font-heading italic text-4xl md:text-5xl lg:text-6xl tracking-tight leading-[0.9] text-white">
-              Every way<br />
-              <span className="text-white/40">Customers pay.</span>
-            </h2>
-            <p className="mt-6 font-body font-light text-white/50 text-base max-w-sm">
-              UPI, cards, net banking, wallets, and cash on delivery — all built in. Integrated with Razorpay, built for every brand and every customer.
-            </p>
-            <div className="mt-8 space-y-3">
-              {['UPI & QR payments', 'Cash on delivery', 'Instant payouts', 'Zero transaction fees on paid plans'].map((feature, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div className="w-1 h-1 rounded-full bg-white/30" />
-                  <span className="font-body text-sm text-white/60">{feature}</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+      {/* 02 — THE CAPITAL (WHITE SECTION) */}
+      <section className="relative min-h-screen py-32 md:py-48 px-6 lg:px-12 bg-[#FAFAFA] text-black overflow-hidden border-t border-black/10">
+        <div 
+          className="absolute right-[-5%] top-[20%] font-[family-name:var(--font-display)] font-bold text-[25vw] leading-none text-black/[0.03] pointer-events-none select-none z-0"
+          style={{ letterSpacing: "-0.05em" }}
+        >
+          CAPITAL
+        </div>
 
-          <motion.div {...fadeUp(0.3)} className="mt-16 lg:mt-0 lg:order-1">
-            <div className="liquid-glass rounded-3xl p-8 max-w-sm mx-auto lg:ml-0">
-              <div className="flex items-center justify-between border-b border-white/5 py-4">
-                <span className="font-mono text-xs text-white/80 tracking-widest">UPI / QR CODE</span>
-                <div className="w-2.5 h-2.5 rounded-full bg-[#FF6B00]" />
-              </div>
-              <div className="flex items-center justify-between border-b border-white/5 py-4">
-                <span className="font-mono text-xs text-white/50 tracking-widest">DEBIT/CREDIT CARD</span>
-              </div>
-              <div className="flex items-center justify-between border-b border-white/5 py-4">
-                <span className="font-mono text-xs text-white/50 tracking-widest">CASH ON DELIVERY</span>
-              </div>
-              <div className="flex items-center justify-between border-b border-white/5 py-4">
-                <span className="font-mono text-xs text-white/50 tracking-widest">NET BANKING</span>
-              </div>
-              
-              <button className="bg-white text-black rounded-full w-full py-4 text-sm font-body font-medium mt-6 transition-transform hover:scale-105 active:scale-95">
-                PAY ₹2,499
-              </button>
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="flex items-center gap-6 mb-12 text-black">
+            <span className="font-mono text-xs tracking-[0.4em] text-black/20 whitespace-nowrap">02</span>
+            <div className="h-px w-full bg-black/10" />
+            <span className="font-mono text-xs tracking-[0.4em] text-black/20 whitespace-nowrap">THE CAPITAL</span>
+          </div>
+          
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <div className="order-2 lg:order-1">
+               <motion.div 
+                 {...fadeUp(0.1)}
+                 className="liquid-glass border-black/10 rounded-[40px] p-12 lg:p-16 max-w-md"
+               >
+                 {['Global Payments', 'Asset Payouts', 'On-Chain Ledger', 'Zero Redirection'].map((p, i) => (
+                   <div key={i} className="flex justify-between items-center py-6 border-b border-black/5 last:border-0 group cursor-default">
+                     <span className="font-mono text-sm tracking-widest text-black/40 group-hover:text-black transition-colors">{p}</span>
+                     <div className="w-1.5 h-1.5 rounded-full bg-black/20 group-hover:bg-black transition-all" />
+                   </div>
+                 ))}
+               </motion.div>
             </div>
-          </motion.div>
+
+            <div className="order-1 lg:order-2">
+              <motion.h2 
+                {...fadeUp(0)}
+                className="font-[family-name:var(--font-display)] font-bold text-6xl md:text-8xl lg:text-9xl text-black tracking-tighter leading-[0.85] mb-12"
+              >
+                GLOBAL<br />
+                <span className="text-black/30 italic font-heading pb-4 block">LIQUIDITY.</span>
+              </motion.h2>
+              
+              <motion.p 
+                {...fadeUp(0.2)}
+                className="font-body font-light text-black/50 text-lg md:text-xl max-w-xl leading-relaxed mb-12"
+              >
+                Integrated global payments. No redirects. No friction. Every transaction archived in real-time.
+              </motion.p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* SECTION 7 — FULFILLMENT */}
-      <section className="py-44 md:py-64 border-t border-white/5 px-6">
-        <div className="max-w-6xl mx-auto lg:grid lg:grid-cols-2 gap-20 items-center">
-          <motion.div {...fadeUp(0)}>
-            <Badge>FULFILLMENT</Badge>
-            <h2 className="mt-8 font-heading italic text-4xl md:text-5xl lg:text-6xl tracking-tight leading-[0.9] text-white">
-              Print. Pack.<br />
-              Ship. <span className="text-white/40">Repeat.</span>
-            </h2>
-            <p className="mt-6 font-body font-light text-white/50 text-base max-w-sm">
-              We connect your store to premium print partners. Upload your design, set your price, and we handle everything from printing to your customer&apos;s doorstep.
-            </p>
-            <div className="mt-8 space-y-3">
-              {['Premium print partners', '2-5 day delivery', 'Flat rate shipping', 'Real-time order tracking'].map((feature, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div className="w-1 h-1 rounded-full bg-white/30" />
-                  <span className="font-body text-sm text-white/60">{feature}</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+      {/* 03 — THE FULFILLMENT */}
+      <section className="relative min-h-screen py-32 md:py-48 px-6 lg:px-12 border-t border-white/10 overflow-hidden">
+        <div 
+          className="absolute left-[50%] translate-x-[-50%] bottom-0 font-[family-name:var(--font-display)] font-bold text-[30vw] leading-none text-white/[0.02] pointer-events-none select-none z-0"
+          style={{ letterSpacing: "-0.05em" }}
+        >
+          SYNC
+        </div>
 
-          <motion.div {...fadeUp(0.3)} className="mt-16 lg:mt-0">
-            <div className="liquid-glass rounded-3xl p-6 md:p-10">
-              <div className="flex items-center justify-between mb-8">
-                <span className="font-mono text-xs text-white/50 tracking-widest">#ORDER-6472</span>
-                <span className="liquid-glass rounded-full px-3 py-1 font-mono text-[10px] text-white/60 tracking-widest">
-                  IN TRANSIT
-                </span>
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <SectionLabel number="03" text="THE LOGISTICS" />
+          
+          <div className="text-center max-w-4xl mx-auto mb-24">
+            <motion.h2 
+              {...fadeUp(0)}
+              className="font-[family-name:var(--font-display)] font-bold text-6xl md:text-8xl lg:text-9xl text-white tracking-tighter leading-[0.85] mb-12"
+            >
+              PRINT.<br />
+              PACK.<br />
+              <span className="text-white/20 italic font-heading">SYNC.</span>
+            </motion.h2>
+            
+            <motion.p 
+              {...fadeUp(0.2)}
+              className="font-body font-light text-white/40 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
+            >
+              Direct endpoint-to-printer manifest synchronization. We handle the physical layer, you scale the visual layer.
+            </motion.p>
+          </div>
+
+          <motion.div 
+            {...fadeUp(0.4)}
+            className="grid md:grid-cols-3 gap-px bg-white/10 border border-white/10 max-w-5xl mx-auto"
+          >
+            {[
+              { label: "PROTOCOL", title: "Automated Workflow", body: "Every sale triggers a direct fulfillment packet to our priority print hubs." },
+              { label: "VELOCITY", title: "Global Transit", body: "Flat rate worldwide shipping with optimized local carrier handoffs." },
+              { label: "ARCHIVE", title: "Order History", body: "Real-time tracking manifest for every single parcel, integrated into your dashboard." }
+            ].map((card, i) => (
+              <div key={i} className="bg-black p-10 group hover:bg-white/[0.02] transition-all">
+                <div className="font-mono text-[10px] tracking-widest text-white/20 uppercase mb-4">{card.label}</div>
+                <h3 className="text-xl font-bold text-white mb-4">{card.title}</h3>
+                <p className="text-sm text-white/40 font-body leading-relaxed">{card.body}</p>
               </div>
-              
-              <div className="relative pl-6 space-y-8">
-                <div className="absolute left-1.5 top-2 bottom-2 w-px bg-white/10" />
-                
-                {[
-                  { text: 'ORDER PLACED', active: false },
-                  { text: 'PRINTING', active: false },
-                  { text: 'PACKED & READY', active: false },
-                  { text: 'OUT FOR DELIVERY', active: true },
-                ].map((step, i) => (
-                  <div key={i} className="relative flex items-center">
-                    <div className={`absolute -left-6 w-3 h-3 rounded-full flex items-center justify-center -translate-x-1/2 bg-black`}>
-                      <div className={`w-1.5 h-1.5 rounded-full ${step.active ? 'bg-white' : 'bg-white/30'}`} />
-                    </div>
-                    <span className={`font-mono text-xs tracking-widest ${step.active ? 'text-white' : 'text-white/40'}`}>
-                      {step.text}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </motion.div>
         </div>
       </section>

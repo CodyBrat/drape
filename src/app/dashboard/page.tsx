@@ -17,28 +17,28 @@ import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const stats = [
-  { label: "Total Revenue", value: "₹1,24,500", change: "+12.5% vs last month", isPositive: true, icon: Wallet, variant: 'accent' as const, isMonetary: true },
-  { label: "Total Orders", value: "284", change: "+8.2% vs last month", isPositive: true, icon: ShoppingBag, variant: 'default' as const },
-  { label: "Store Visitors", value: "12,430", change: "+23.1% vs last month", isPositive: true, icon: Users, variant: 'default' as const },
+  { label: "Total Revenue", value: "$124,500", change: "+12.5% vs last month", isPositive: true, icon: Wallet, variant: 'accent' as const, isMonetary: true },
+  { label: "Total Orders", value: "2,840", change: "+8.2% vs last month", isPositive: true, icon: ShoppingBag, variant: 'default' as const },
+  { label: "Store Visitors", value: "124,300", change: "+23.1% vs last month", isPositive: true, icon: Users, variant: 'default' as const },
   { label: "Conversion Rate", value: "2.3%", change: "-0.4% vs last month", isPositive: false, icon: TrendingUp, variant: 'default' as const },
 ];
 
 const revenueData = [
-  { day: 'Mon', value: 8200, label: '₹8.2k' },
-  { day: 'Tue', value: 12100, label: '₹12.1k' },
-  { day: 'Wed', value: 9400, label: '₹9.4k' },
-  { day: 'Thu', value: 15600, label: '₹15.6k' },
-  { day: 'Fri', value: 11200, label: '₹11.2k' },
-  { day: 'Sat', value: 18400, label: '₹18.4k' },
-  { day: 'Sun', value: 14500, label: '₹14.5k' },
+  { day: 'Mon', value: 8200, label: '$8.2k' },
+  { day: 'Tue', value: 12100, label: '$12.1k' },
+  { day: 'Wed', value: 9400, label: '$9.4k' },
+  { day: 'Thu', value: 15600, label: '$15.6k' },
+  { day: 'Fri', value: 11200, label: '$11.2k' },
+  { day: 'Sat', value: 18400, label: '$18.4k' },
+  { day: 'Sun', value: 14500, label: '$14.5k' },
 ];
 
 const topProducts = [
-  { name: "VOID OVERSIZED TEE", revenue: "₹1,85,876", percentage: 80 },
-  { name: "ACID LOGO PUNCH", revenue: "₹1,15,611", percentage: 65 },
-  { name: "NOISE CORE GRAPHIC", revenue: "₹1,07,133", percentage: 45 },
-  { name: "CORE BLACK BOX TEE", revenue: "₹53,955", percentage: 32 },
-  { name: "VOLTAGE DROP TEE", revenue: "₹53,162", percentage: 28 },
+  { name: "VOID OVERSIZED TEE", revenue: "$18,587", percentage: 80 },
+  { name: "ACID LOGO PUNCH", revenue: "$11,561", percentage: 65 },
+  { name: "NOISE CORE GRAPHIC", revenue: "$10,713", percentage: 45 },
+  { name: "CORE BLACK BOX TEE", revenue: "$5,395", percentage: 32 },
+  { name: "VOLTAGE DROP TEE", revenue: "$5,316", percentage: 28 },
 ];
 
 export default function OverviewPage() {
@@ -53,7 +53,7 @@ export default function OverviewPage() {
       <div className="flex justify-between items-end mb-8">
         <div>
           <h2 className="text-3xl font-display font-bold tracking-tight text-[#111111]">
-            Good morning, <span className="font-heading italic">Arjun.</span>
+            Experience <span className="font-heading italic">Direct.</span>
           </h2>
           <p className="text-[10px] font-mono text-[#9CA3AF] mt-2 font-bold tracking-[0.2em] uppercase">
             Monday, 2 December 2025
@@ -139,10 +139,10 @@ export default function OverviewPage() {
               <table className="w-full text-left">
                 <tbody>
                   {[
-                    { id: "#DRP-1042", name: "Arjun Singh", amount: "₹1,499", status: "Fulfilled", color: "text-emerald-500 bg-emerald-500/10" },
-                    { id: "#DRP-1041", name: "Meera Nair", amount: "₹1,299", status: "Pending", color: "text-amber-500 bg-amber-500/10" },
-                    { id: "#DRP-1040", name: "Rohan Varma", amount: "₹1,599", status: "Processing", color: "text-blue-500 bg-blue-500/10" },
-                    { id: "#DRP-1039", name: "Anjali Gupta", amount: "₹1,199", status: "Cancelled", color: "text-rose-500 bg-rose-500/10" },
+                    { id: "#DRP-1042", name: "Alex Sterling", amount: "$149", status: "Fulfilled", color: "text-emerald-500 bg-emerald-500/10" },
+                    { id: "#DRP-1041", name: "Sarah Vance", amount: "$129", status: "Pending", color: "text-amber-500 bg-amber-500/10" },
+                    { id: "#DRP-1040", name: "Julian Thorne", amount: "$159", status: "Processing", color: "text-blue-500 bg-blue-500/10" },
+                    { id: "#DRP-1039", name: "Elena Rossi", amount: "$119", status: "Cancelled", color: "text-rose-500 bg-rose-500/10" },
                   ].map((order, i) => (
                     <tr key={i} className="group border-b border-[#F5F5F5] last:border-0 hover:bg-[#F9FAFB] transition-all cursor-pointer">
                       <td className="px-6 py-4 text-sm font-mono font-medium text-[#111111]">{order.id}</td>
@@ -197,7 +197,7 @@ export default function OverviewPage() {
           <section className="bg-[#111111] rounded-2xl p-6 shadow-xl shadow-black/10">
             <div className="grid grid-cols-2 gap-6">
               {[
-                { label: "Avg Ticket", val: "₹438", icon: Wallet },
+                { label: "Avg Ticket", val: "$438", icon: Wallet },
                 { label: "Return Rate", val: "2.1%", icon: TrendingDown },
                 { label: "Repeat Cust.", val: "34%", icon: Users },
                 { label: "Fulfillment", val: "3.2d", icon: ShoppingBag },
@@ -220,9 +220,9 @@ export default function OverviewPage() {
             <div className="mt-6 space-y-5">
               {[
                 { label: "Visibility", val: "Production Live", detail: "Live", color: "bg-emerald-500" },
-                { label: "Endpoint", val: "mystore.drape.in", detail: "Domain" },
+                { label: "Endpoint", val: "mystore.getdrape.com", detail: "Domain" },
                 { label: "Authority", val: "Growth Logistics", detail: "PRO", color: "bg-black text-white px-2 py-0.5 rounded text-[8px] font-bold" },
-                { label: "Next Cycle", val: "₹8,240 on Dec 15", detail: "Payout" },
+                { label: "Next Cycle", val: "$8,240 on Dec 15", detail: "Payout" },
               ].map((h, i) => (
                 <div key={i} className="flex justify-between items-start group/health">
                   <div className="flex flex-col">

@@ -2,153 +2,111 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 
 const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 24 },
+  initial: { opacity: 0, y: 40 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-80px" },
-  transition: { duration: 0.7, delay, ease: [0.25, 0, 0, 1] as const }
+  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] as const }
 });
+
+const plans = [
+  {
+    tier: "ENTRY",
+    price: "$0",
+    interval: "FOR LIFE",
+    features: ["1 Node Storefront", "05 SKU Limit", "Drape Protocol Subdomain", "5% Transaction Fee"],
+    action: "START FREE",
+    note: "Initialize Brand"
+  },
+  {
+    tier: "CORE",
+    price: "$29",
+    interval: "PER MONTH",
+    features: ["Custom Endpoint Authority", "30 SKU Limit", "Full Aesthetic Sovereignty", "2% Transaction Fee", "Basic Analytics"],
+    action: "UPGRADE NOW",
+    note: "Scale Operation",
+    highlight: true
+  },
+  {
+    tier: "ELITE",
+    price: "$79",
+    interval: "PER MONTH",
+    features: ["Unlimited SKU Artifacts", "0% Transaction Fee", "Priority Logistics Flow", "Real-time Data Synthesis", "Abandoned Cart Recovery"],
+    action: "GO PROFESSIONAL",
+    note: "Market Dominance"
+  }
+];
 
 export function Pricing() {
   return (
-    <section className="py-32 md:py-44 border-t border-white/5 px-6" id="pricing">
-      <div className="max-w-5xl mx-auto flex flex-col items-center">
-        <motion.div {...fadeUp(0)}>
-          <Badge>PRICING</Badge>
-        </motion.div>
+    <section className="relative bg-black border-t border-white/10 overflow-hidden" id="pricing">
+      {/* BACKGROUND TEXTURE */}
+      <div 
+        className="absolute right-[-10%] top-[40%] font-[family-name:var(--font-display)] font-bold text-[25vw] text-white/[0.015] pointer-events-none select-none z-0"
+        style={{ letterSpacing: "-0.05em" }}
+      >
+        TIER
+      </div>
 
-        <motion.h2 
-          {...fadeUp(0.2)}
-          className="mt-8 font-heading italic text-5xl md:text-6xl lg:text-7xl tracking-tight leading-[0.9] text-white text-center"
-        >
-          Pay when<br />
-          <span className="text-white/40">you earn.</span>
-        </motion.h2>
+      <div className="relative z-10 max-w-7xl mx-auto border-x border-white/10">
+        <div className="border-b border-white/10 py-32 px-6 lg:px-12">
+          <motion.h2 
+            {...fadeUp(0)}
+            className="font-[family-name:var(--font-display)] font-bold text-6xl md:text-8xl text-white tracking-tighter leading-[0.85]"
+          >
+            VALUATION<br />
+            <span className="text-white/20 italic font-heading">METRICS.</span>
+          </motion.h2>
+        </div>
 
-        <motion.p 
-          {...fadeUp(0.3)}
-          className="mt-4 font-body font-light text-white/40 text-center"
-        >
-          Start free. Upgrade when you&apos;re ready. No lock-ins.
-        </motion.p>
-
-        <div className="grid md:grid-cols-3 gap-4 mt-16 w-full">
-          {/* FREE PLAN */}
-          <motion.div {...fadeUp(0.4)} className="liquid-glass rounded-3xl p-8 flex flex-col">
-            <div className="font-mono text-xs tracking-widest text-white/30 uppercase">FREE</div>
-            <div className="mt-4 flex items-baseline">
-              <span className="font-heading italic text-5xl text-white">₹0</span>
-              <span className="font-body text-sm text-white/30 ml-2">/month</span>
-            </div>
-            
-            <div className="border-t border-white/5 my-6" />
-            
-            <div className="space-y-3 flex-1">
-              {[
-                '1 store',
-                'Up to 5 products',
-                'Drape subdomain',
-                '5% commission per sale'
-              ].map((feature, i) => (
-                <div key={i} className="flex gap-3 items-start">
-                  <div className="w-1.5 h-1.5 rounded-full bg-white/20 mt-1.5 shrink-0" />
-                  <span className="font-body text-sm text-white/50">{feature}</span>
+        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10">
+          {plans.map((plan, i) => (
+            <div key={i} className="flex flex-col p-8 lg:p-16 h-full group hover:bg-white/[0.02] transition-all relative overflow-hidden">
+              {plan.highlight && (
+                 <div className="absolute top-0 right-0 p-12 opacity-10 text-white pointer-events-none group-hover:opacity-20 transition-opacity">
+                    <div className="font-heading italic text-6xl">★</div>
+                 </div>
+              )}
+              
+              <div className="font-mono text-[10px] tracking-[0.4em] text-white/30 uppercase mb-8">{plan.tier} TIER</div>
+              
+              <div className="mb-12">
+                <div className="font-[family-name:var(--font-display)] font-bold text-6xl lg:text-8xl text-white tracking-tighter">
+                  {plan.price}
                 </div>
-              ))}
-            </div>
-            
-            <Link href="/signup" className="w-full mt-8">
-              <Button variant="outline" className="w-full py-3 bg-transparent hover:bg-white/5 border-white/10 text-white/60">
-                START FREE
-              </Button>
-            </Link>
-          </motion.div>
+                <div className="font-heading italic text-xl text-white/40 mt-2">{plan.interval}</div>
+              </div>
 
-          {/* STARTER PLAN */}
-          <motion.div {...fadeUp(0.5)} className="relative flex flex-col">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 w-max">
-              <div className="liquid-glass rounded-full px-4 py-1 font-mono text-[10px] tracking-widest text-white">
-                MOST POPULAR
-              </div>
-            </div>
-            <div className="liquid-glass-strong rounded-3xl p-8 border border-white/20 flex flex-col h-full">
-              <div className="font-mono text-xs tracking-widest text-white/30 uppercase">STARTER</div>
-              <div className="mt-4 flex items-baseline">
-                <span className="font-heading italic text-5xl text-white">₹299</span>
-                <span className="font-body text-sm text-white/30 ml-2">/month</span>
-              </div>
-              
-              <div className="border-t border-white/5 my-6" />
-              
-              <div className="space-y-3 flex-1">
-                {[
-                  'Up to 30 products',
-                  'Custom domain',
-                  'Remove Drape branding',
-                  'All templates',
-                  '2% commission per sale',
-                  'Basic analytics'
-                ].map((feature, i) => (
-                  <div key={i} className="flex gap-3 items-start">
-                    <div className="w-1.5 h-1.5 rounded-full bg-white/80 mt-1.5 shrink-0" />
-                    <span className="font-body text-sm text-white/80">{feature}</span>
+              <div className="space-y-6 flex-1 mb-16">
+                {plan.features.map((feature, idx) => (
+                  <div key={idx} className="flex items-center gap-4 border-b border-white/5 pb-4 last:border-0 group-hover:border-white/10 transition-colors">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
+                    <span className="font-body text-sm lg:text-base text-white/50 group-hover:text-white/80 transition-colors">{feature}</span>
                   </div>
                 ))}
               </div>
-              
-              <Link href="/signup" className="w-full mt-8">
-                <Button variant="solid" className="w-full py-3">
-                  GET STARTED
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
 
-          {/* GROWTH PLAN */}
-          <motion.div {...fadeUp(0.6)} className="liquid-glass rounded-3xl p-8 flex flex-col">
-            <div className="font-mono text-xs tracking-widest text-white/30 uppercase">GROWTH</div>
-            <div className="mt-4 flex items-baseline">
-              <span className="font-heading italic text-5xl text-white">₹799</span>
-              <span className="font-body text-sm text-white/30 ml-2">/month</span>
+              <div className="mt-auto">
+                 <Link href="/signup" className="block w-full">
+                   <button className="w-full py-5 bg-white text-black font-bold text-xs uppercase tracking-[0.3em] hover:bg-transparent hover:text-white border border-white transition-all">
+                     {plan.action}
+                   </button>
+                 </Link>
+                 <div className="mt-6 text-center">
+                    <span className="font-heading italic text-white/20 text-lg">{plan.note}</span>
+                 </div>
+              </div>
             </div>
-            
-            <div className="border-t border-white/5 my-6" />
-            
-            <div className="space-y-3 flex-1">
-              {[
-                'Unlimited products',
-                '0% commission',
-                'WhatsApp notifications',
-                'Abandoned cart recovery',
-                'Full analytics',
-                'Priority fulfillment'
-              ].map((feature, i) => (
-                <div key={i} className="flex gap-3 items-start">
-                  <div className="w-1.5 h-1.5 rounded-full bg-white/20 mt-1.5 shrink-0" />
-                  <span className="font-body text-sm text-white/50">{feature}</span>
-                </div>
-              ))}
-            </div>
-            
-            <Link href="/signup" className="w-full mt-8">
-              <Button variant="outline" className="w-full py-3 bg-transparent hover:bg-white/5 border-white/10 text-white/60">
-                GO PRO
-              </Button>
-            </Link>
-          </motion.div>
+          ))}
         </div>
 
-        <motion.div 
-          {...fadeUp(0.8)}
-          className="mt-12 text-center"
-        >
-          <p className="font-mono text-xs tracking-widest text-white/20 leading-relaxed uppercase">
-            All plans include: Razorpay payments · UPI + COD · Priority fulfillment · Mobile-optimized storefront
-          </p>
-        </motion.div>
+        <div className="border-t border-white/10 py-12 px-6 lg:px-12 text-center bg-white/[0.01]">
+           <p className="font-mono text-[10px] tracking-[0.4em] text-white/20 uppercase">
+             All deployments include: Global Asset Distribution · Integrated Ledger · Optimized Checkout Node
+           </p>
+        </div>
       </div>
     </section>
   );

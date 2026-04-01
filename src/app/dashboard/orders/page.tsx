@@ -41,58 +41,58 @@ interface Order {
 const ordersData: Order[] = [
   { 
     id: "#DRP-1042", 
-    customer: "Arjun Singh", 
-    email: "arjun@example.com",
-    phone: "+91 99887 76655",
-    address: "B-402, Skyline Apartments, Mumbai, MH 400053",
-    amount: "₹1,499", 
+    customer: "Alex Sterling", 
+    email: "alex@example.com",
+    phone: "+1 212 555 0198",
+    address: "742 Evergreen Terrace, New York, NY 10001",
+    amount: "$149", 
     status: "Fulfilled", 
     date: "Dec 1, 2025",
-    items: [{ id: "VOID-01", name: "VOID OVERSIZED TEE", size: "L", qty: 1, price: "₹1,499" }]
+    items: [{ id: "VOID-01", name: "VOID OVERSIZED TEE", size: "L", qty: 1, price: "$149" }]
   },
   { 
     id: "#DRP-1041", 
-    customer: "Meera Nair", 
-    email: "meera@example.com",
-    phone: "+91 98765 43210",
-    address: "Flat 12, Rose Villa, Bengaluru, KA 560001",
-    amount: "₹2,598", 
+    customer: "Sarah Vance", 
+    email: "sarah@example.com",
+    phone: "+44 20 7946 0958",
+    address: "Flat 12, Rose Villa, London, UK SW1A 1AA",
+    amount: "$259", 
     status: "Pending", 
     date: "Dec 1, 2025",
-    items: [{ id: "VOID-02", name: "ACID LOGO PUNCH", size: "M", qty: 2, price: "₹1,299" }]
+    items: [{ id: "VOID-02", name: "ACID LOGO PUNCH", size: "M", qty: 2, price: "$129" }]
   },
   { 
     id: "#DRP-1040", 
-    customer: "Rohan Varma", 
-    email: "rohan@example.com",
-    phone: "+91 91234 56789",
-    address: "24/B Sector 5, Lucknow, UP 226001",
-    amount: "₹1,599", 
+    customer: "Julian Thorne", 
+    email: "julian@example.com",
+    phone: "+61 2 5550 1234",
+    address: "24/B Sector 5, Sydney, AU 2000",
+    amount: "$159", 
     status: "Processing", 
     date: "Nov 30, 2025",
-    items: [{ id: "VOID-03", name: "NOISE CORE GRAPHIC", size: "XL", qty: 1, price: "₹1,599" }]
+    items: [{ id: "VOID-03", name: "NOISE CORE GRAPHIC", size: "XL", qty: 1, price: "$159" }]
   },
   { 
     id: "#DRP-1039", 
-    customer: "Anjali Gupta", 
-    email: "anjali@example.com",
-    phone: "+91 88776 65544",
-    address: "Penthouse 3, Galaxy Heights, Delhi, DL 110001",
-    amount: "₹1,199", 
+    customer: "Elena Rossi", 
+    email: "elena@example.com",
+    phone: "+39 06 1234 5678",
+    address: "Penthouse 3, Galaxy Heights, Rome, IT 00100",
+    amount: "$119", 
     status: "Cancelled", 
     date: "Nov 30, 2025",
-    items: [{ id: "VOID-04", name: "CORE BLACK BOX TEE", size: "S", qty: 1, price: "₹1,199" }]
+    items: [{ id: "VOID-04", name: "CORE BLACK BOX TEE", size: "S", qty: 1, price: "$119" }]
   },
   { 
     id: "#DRP-1038", 
-    customer: "Siddharth Rao", 
-    email: "sid@example.com",
-    phone: "+91 77665 54433",
-    address: "Row House #7, Green Park, Hyderabad, TL 500001",
-    amount: "₹2,798", 
+    customer: "Marcus Wright", 
+    email: "marcus@example.com",
+    phone: "+81 3 1234 5678",
+    address: "Row House #7, Green Park, Tokyo, JP 100-0001",
+    amount: "$279", 
     status: "Fulfilled", 
     date: "Nov 29, 2025",
-    items: [{ id: "VOID-05", name: "VOLTAGE DROP TEE", size: "L", qty: 2, price: "₹1,399" }]
+    items: [{ id: "VOID-05", name: "VOLTAGE DROP TEE", size: "L", qty: 2, price: "$139" }]
   },
 ];
 

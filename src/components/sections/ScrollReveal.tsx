@@ -11,7 +11,7 @@ export function ScrollReveal() {
     offset: ["start 70%", "end center"]
   });
 
-  const text = "We built Drape because we were tired of watching Indian brands struggle with tools built for America. Your brand deserves better.";
+  const text = "We built Drape because we were tired of watching creators struggle with fragmented tools. Your brand deserves better.";
   
   const words = text.split(" ");
 
@@ -26,7 +26,7 @@ export function ScrollReveal() {
             const start = i / words.length;
             const end = start + (1 / words.length);
             
-            const isIndianBrands = word === "Indian" || word === "brands";
+            const isCreators = word === "creators" || word === "brand";
             
             // eslint-disable-next-line react-hooks/rules-of-hooks
             const opacity = useTransform(
@@ -38,7 +38,7 @@ export function ScrollReveal() {
             return (
               <motion.span
                 key={i}
-                style={{ opacity: isIndianBrands ? 1 : opacity }}
+                style={{ opacity: isCreators ? 1 : opacity }}
                 className="mr-2 lg:mr-3 mb-2"
               >
                 {word}

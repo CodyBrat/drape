@@ -1,68 +1,84 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/Badge";
+import { cn } from "@/lib/utils";
 
 const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 24 },
+  initial: { opacity: 0, y: 40 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-80px" },
-  transition: { duration: 0.7, delay, ease: [0.25, 0, 0, 1] as const }
+  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] as const }
 });
 
+const testimonials = [
+  {
+    quote: "I was spending $100/month on fragmented platforms and apps. Drape simplified everything. One interface, one bill.",
+    name: "Alex S.",
+    role: "Director",
+    brand: "VOIDWEAR"
+  },
+  {
+    quote: "The speed of setup is unmatched. Our storefront was live and processing orders before the first cup of coffee.",
+    name: "Sarah V.",
+    role: "Founder",
+    brand: "KORA STUDIOS"
+  },
+  {
+    quote: "The unified checkout experience is a direct revenue driver. We've seen a massive boost in global conversion.",
+    name: "Julian T.",
+    role: "CEO",
+    brand: "THORNE"
+  }
+];
+
 export function Testimonials() {
-  const testimonials = [
-    {
-      quote: "I was spending ₹8,000/month on Shopify and apps. Drape cut that to ₹299. Same features, built for India.",
-      name: "Arjun S.",
-      brand: "VOIDWEAR"
-    },
-    {
-      quote: "Setup took literally 4 minutes. My store was live before I finished my chai.",
-      name: "Priya M.",
-      brand: "KORA STUDIOS"
-    },
-    {
-      quote: "The UPI checkout alone is worth it. My conversion rate went up 40% because customers could just scan and pay.",
-      name: "Rahul K.",
-      brand: "STATIC NOISE"
-    }
-  ];
-
   return (
-    <section className="py-32 md:py-44 border-t border-white/5 px-6">
-      <div className="max-w-6xl mx-auto">
-        <motion.div {...fadeUp(0)}>
-          <Badge>WHAT BRANDS SAY</Badge>
-        </motion.div>
+    <section className="relative bg-black border-t border-white/10 overflow-hidden" id="testimonials">
+      {/* BACKGROUND TEXTURE */}
+      <div 
+        className="absolute left-[-10%] top-[30%] font-[family-name:var(--font-display)] font-bold text-[25vw] text-white/[0.015] pointer-events-none select-none z-0"
+        style={{ letterSpacing: "-0.05em" }}
+      >
+        WITNESS
+      </div>
 
-        <motion.h2 
-          {...fadeUp(0.2)}
-          className="mt-8 font-heading italic text-5xl md:text-6xl lg:text-7xl tracking-tight leading-[0.9] text-white"
-        >
-          They started<br />
-          with <span className="text-white/40">Drape.</span>
-        </motion.h2>
+      <div className="relative z-10 max-w-7xl mx-auto border-x border-white/10">
+        <div className="border-b border-white/10 py-32 px-6 lg:px-12">
+          <motion.h2 
+            {...fadeUp(0)}
+            className="font-[family-name:var(--font-display)] font-bold text-6xl md:text-8xl text-white tracking-tighter leading-[0.85]"
+          >
+            CLIENT<br />
+            <span className="text-white/20 italic font-heading">TESTIMONY.</span>
+          </motion.h2>
+        </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mt-16">
+        <div className="divide-y divide-white/10">
           {testimonials.map((t, i) => (
-            <motion.div 
-              key={i} 
-              {...fadeUp(0.3 + (i * 0.1))} 
-              className="liquid-glass rounded-2xl p-8 flex flex-col"
-            >
-              <div className="font-heading italic text-6xl text-white/10 leading-none mb-4">
-                &quot;
+            <div key={i} className="py-24 lg:py-44 px-6 lg:px-12 group hover:bg-white/[0.02] transition-all">
+              <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+                <div className="lg:col-span-3">
+                  <div className="font-mono text-[10px] tracking-[0.4em] text-white/20 uppercase mb-8 flex items-center gap-3">
+                    <span className="w-8 h-px bg-white/20" /> SIGNAL {i + 1}
+                  </div>
+                  <div className="mt-4">
+                    <div className="text-white font-bold tracking-tight">{t.name}</div>
+                    <div className="font-heading italic text-white/40 mt-1">{t.role}</div>
+                    <div className="font-mono text-[9px] tracking-widest text-[#111111] bg-white px-2 py-0.5 rounded-full inline-block mt-4 uppercase font-black">{t.brand}</div>
+                  </div>
+                </div>
+                
+                <div className="lg:col-span-9">
+                  <motion.blockquote 
+                    {...fadeUp(0.1)}
+                    className="font-heading italic text-4xl md:text-5xl lg:text-7xl text-white leading-[1.1] tracking-tight relative"
+                  >
+                    <span className="absolute -left-12 -top-12 text-[10rem] text-white/[0.05] pointer-events-none leading-none select-none font-[family-name:var(--font-display)]">&quot;</span>
+                    {t.quote}
+                  </motion.blockquote>
+                </div>
               </div>
-              <p className="font-heading italic text-lg text-white/80 leading-relaxed flex-1">
-                {t.quote}
-              </p>
-              
-              <div className="border-t border-white/5 mt-6 pt-6 flex flex-col">
-                <span className="font-body font-medium text-sm text-white">{t.name}</span>
-                <span className="font-mono text-[10px] text-white/30 mt-1 uppercase tracking-widest">{t.brand}</span>
-              </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

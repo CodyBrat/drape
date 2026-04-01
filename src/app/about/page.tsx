@@ -11,9 +11,7 @@ import {
 import { Footer } from "@/components/sections/Footer";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { 
-  Plus, 
-  ArrowRight,
+import {
   ChevronLeft
 } from "lucide-react";
 
@@ -126,8 +124,8 @@ const HeroSection = () => {
               <div className="font-mono text-4xl font-bold text-white mt-1">2025</div>
             </div>
             <div>
-              <div className="font-mono text-xs text-white/30 uppercase tracking-widest">BASED IN</div>
-              <div className="font-mono text-lg text-white mt-1">MUMBAI, MH</div>
+              <div className="font-mono text-xs text-white/30 uppercase tracking-widest">ORIGIN</div>
+              <div className="font-mono text-lg text-white mt-1">EST. 2025</div>
             </div>
           </motion.div>
 
@@ -162,18 +160,18 @@ const ManifestoSection = () => {
           {[
             {
               label: "THE PROBLEM",
-              title: "Too expensive for creators.",
-              body: "Shopify costs ₹11,000/month. Printify adds another ₹2,400. Then 5 more apps. Before a single sale."
+              title: "Fragmented tools.",
+              body: "The old way required 10 different subscriptions. 5 different dashboards. And zero synergy between design and distribution."
             },
             {
               label: "THE MARKET",
-              title: "800+ D2C brands. Zero tools.",
-              body: "Brands are growing faster than ever. Every brand needs tools built for growth, not just geography."
+              title: "Endless complexity.",
+              body: "Modern brands are moving at light speed, but legacy platforms are still stuck in the past with rigid, complex workflows."
             },
             {
               label: "THE SOLUTION",
-              title: "One platform. Built here.",
-              body: "Store builder, print-on-demand, UPI payments, priority fulfillment. Everything. One subscription."
+              title: "Unified ecosystem.",
+              body: "Store builder, dynamic production, global payments, priority fulfillment. Everything. One seamless experience."
             }
           ].map((item, i) => (
             <motion.div 
@@ -198,9 +196,9 @@ const ManifestoSection = () => {
 
           <div className="mt-16 space-y-8 max-w-2xl">
             {[
-              "I was 20 years old, sitting in Mumbai, trying to start a clothing brand. I spent weeks navigating Shopify, Printify, Gelato, Razorpay — all as separate tools, all built for Western markets, all adding up to more than I could afford.",
-              "I couldn't sell a t-shirt for ₹799 because shipping alone cost ₹960. I couldn't accept UPI without a third-party plugin. I couldn't get my store live in under a day without watching 6 different tutorials.",
-              "So I built what I needed. A single platform where a brand owner can sign up, create their store, add their products, and start selling — all in under 5 minutes. No Shopify. No Printify. No ₹11,000/month."
+              "I was trying to start my own brand and I quickly realized the system was broken. I spent weeks trying to connect disconnected tools — design platforms, store builders, payment gateways — all built by different people with different goals.",
+              "I couldn't get my vision live without navigating a maze of tutorials and hidden fees. The barrier to entry wasn't my creativity; it was the tools I was forced to use.",
+              "So I built Drape. A single, vertically integrated platform where a brand owner can sign up, create their store, add their products, and start scaling — all in under 5 minutes. No external apps. No fragmentation. No compromise."
             ].map((para, i) => (
               <motion.p 
                 key={i} 
@@ -221,7 +219,7 @@ const ManifestoSection = () => {
               <div>
                 <div className="text-xl font-bold text-black">Priyabrata Singh</div>
                 <div className="font-mono text-[10px] text-black/40 tracking-widest uppercase mt-1">Founder, Drape</div>
-                <div className="font-mono text-[10px] text-black/40 mt-1">Mumbai, India 🇮🇳</div>
+                <div className="font-mono text-[10px] text-black/40 mt-1">EST. 2025</div>
               </div>
             </div>
             <div className="mt-6 pt-6 border-t border-black/5">
@@ -242,9 +240,9 @@ const MarqueeSection = () => {
       <div className="py-2">
         <Marquee speed={40} gradient={false} autoFill>
           {[
-            "4,200+ STORES", "₹2.4CR EARNED", 
+            "4,200+ STORES", "UNPARALLELED GROWTH", 
             "98% DELIVERY SUCCESS", "5 MIN SETUP", 
-            "800+ D2C BRANDS", 
+            "GLOBAL REACH", 
             "FREE TO START", "BUILT FOR ALL"
           ].map((item, i) => (
             <div key={i} className="flex items-center px-8 border-r border-white/10 last:border-none">
@@ -257,9 +255,9 @@ const MarqueeSection = () => {
       <div className="border-t border-white/5 py-2">
         <Marquee speed={30} direction="right" gradient={false} autoFill>
           {[
-            "NO SHOPIFY NEEDED", "UPI BUILT IN", 
-            "COD SUPPORTED", "INR PRICING", 
-            "PRIORITY FULFILLMENT", "2-5 DAY DELIVERY"
+            "NO EXTRA APPS", "NATIVE PAYMENTS", 
+            "UNIFIED LOGISTICS", "PREMIUM QUOTES", 
+            "PRIORITY FULFILLMENT", "FAST DELIVERY"
           ].map((item, i) => (
             <div key={i} className="flex items-center px-8 border-r border-white/10 last:border-none">
               <span className="font-mono text-xs tracking-widest uppercase text-white/40 py-4 mr-8">{item}</span>
@@ -342,7 +340,7 @@ const BleedingSection = () => {
             style={{ x: xLeft }}
             className="font-[family-name:var(--font-display)] font-bold text-[clamp(4rem,12vw,12rem)] text-white tracking-tighter leading-none"
           >
-            MADE IN INDIA
+            BUILT FOR CREATORS
           </motion.h2>
         </div>
         <div className="overflow-hidden whitespace-nowrap flex justify-end">
@@ -381,8 +379,8 @@ const ValuesSection = () => {
           {[
             {
               num: "01",
-              title: "Brand First.",
-              body: "Every decision we make starts with one question: does this work for the brand? Quality, speed, pricing — non-negotiable."
+              title: "Product First.",
+              body: "Every decision we make starts with the brand. Quality, speed, and reliability are our only metrics."
             },
             {
               num: "02",

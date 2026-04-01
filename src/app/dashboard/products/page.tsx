@@ -28,14 +28,14 @@ interface Product {
 }
 
 const productsData: Product[] = [
-  { id: "VOID-01", name: "VOID OVERSIZED TEE", category: "T-Shirts", price: "₹1,499", stock: 124, status: "Active", sales: 124 },
-  { id: "VOID-02", name: "ACID LOGO PUNCH", category: "T-Shirts", price: "₹1,299", stock: 89, status: "Active", sales: 89 },
-  { id: "VOID-03", name: "NOISE CORE GRAPHIC", category: "T-Shirts", price: "₹1,599", stock: 8, status: "Active", sales: 67 },
-  { id: "VOID-04", name: "CORE BLACK BOX TEE", category: "T-Shirts", price: "₹1,199", stock: 0, status: "Draft", sales: 45 },
-  { id: "VOID-05", name: "VOLTAGE DROP TEE", category: "T-Shirts", price: "₹1,399", stock: 38, status: "Active", sales: 38 },
-  { id: "VOID-06", name: "DISTORTED TYPE-01", category: "T-Shirts", price: "₹1,449", stock: 29, status: "Active", sales: 29 },
-  { id: "VOID-07", name: "LABORATORY SAMPLE", category: "Limited", price: "₹1,899", stock: 12, status: "Active", sales: 18 },
-  { id: "VOID-08", name: "RAW CUT TEE", category: "Essentials", price: "₹1,699", stock: 52, status: "Active", sales: 52 },
+  { id: "VOID-01", name: "VOID OVERSIZED TEE", category: "T-Shirts", price: "$49", stock: 124, status: "Active", sales: 124 },
+  { id: "VOID-02", name: "ACID LOGO PUNCH", category: "T-Shirts", price: "$39", stock: 89, status: "Active", sales: 89 },
+  { id: "VOID-03", name: "NOISE CORE GRAPHIC", category: "T-Shirts", price: "$59", stock: 8, status: "Active", sales: 67 },
+  { id: "VOID-04", name: "CORE BLACK BOX TEE", category: "T-Shirts", price: "$29", stock: 0, status: "Draft", sales: 45 },
+  { id: "VOID-05", name: "VOLTAGE DROP TEE", category: "T-Shirts", price: "$45", stock: 38, status: "Active", sales: 38 },
+  { id: "VOID-06", name: "DISTORTED TYPE-01", category: "T-Shirts", price: "$44", stock: 29, status: "Active", sales: 29 },
+  { id: "VOID-07", name: "LABORATORY SAMPLE", category: "Limited", price: "$89", stock: 12, status: "Active", sales: 18 },
+  { id: "VOID-08", name: "RAW CUT TEE", category: "Essentials", price: "$69", stock: 52, status: "Active", sales: 52 },
 ];
 
 export default function ProductsPage() {
@@ -290,7 +290,7 @@ export default function ProductsPage() {
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-widest ml-1">Retail Valuation</label>
                      <div className="relative">
-                        <span className="absolute left-5 top-1/2 -translate-y-1/2 font-bold text-[#111111]">₹</span>
+                        <span className="absolute left-5 top-1/2 -translate-y-1/2 font-bold text-[#111111]">$</span>
                         <input type="number" placeholder="0.00" className="w-full bg-[#F5F5F5] border border-transparent focus:border-[#E5E7EB] focus:bg-white rounded-2xl pl-10 pr-5 py-4 text-sm font-bold transition-all outline-none" />
                      </div>
                   </div>

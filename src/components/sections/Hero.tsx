@@ -77,7 +77,7 @@ export function Hero() {
           {...fadeUp(0.6)}
           className="font-body font-light text-white/50 text-base md:text-lg max-w-md mx-auto mt-6"
         >
-          Everything you need to launch, sell, and grow your clothing brand. No Shopify. No apps. Just Drape.
+          Everything you need to launch, sell, and grow your clothing brand. Everything integrated. No fragmentation. Just Drape.
         </motion.p>
 
         <motion.div 
@@ -185,7 +185,7 @@ export function Hero() {
 
         <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 z-20">
           <div className="liquid-glass rounded-2xl p-4 md:p-6">
-            <div className="font-heading italic text-3xl md:text-4xl text-white">₹2.4Cr+</div>
+            <div className="font-heading italic text-3xl md:text-4xl text-white">$2.4M+</div>
             <div className="font-mono text-xs text-white/40 tracking-wider mt-1 uppercase">earned by brands</div>
           </div>
         </div>
