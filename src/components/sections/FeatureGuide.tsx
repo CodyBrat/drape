@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+import Image from "next/image";
 import { Store, CreditCard, Package } from "lucide-react";
 
 // Register plugins — must happen outside component
@@ -143,39 +144,64 @@ export function FeatureGuide() {
           });
         }
 
-        // Create main timeline
+        // Create main timeline with physical collision checking
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: ".feature-guide-section",
             start: "top center",
             end: "bottom center",
-            scrub: true, // "moves as we scroll" with absolute precision
+            scrub: true,
             invalidateOnRefresh: true,
+            onUpdate: () => {
+              const guideTop = guide.getBoundingClientRect().top;
+
+              // Physical proximity logic completely decoupled from scroll percentage
+              // Ghost triggers waypoint when its absolute screen coordinate physically crosses it
+              markers.forEach((marker, i) => {
+                const markerTop = marker.getBoundingClientRect().top;
+                
+                if (Math.abs(guideTop - markerTop) < 150) {
+                   if (!marker.dataset.active) {
+                      marker.dataset.active = "true";
+                      activateWaypoint(i);
+                   }
+                } else {
+                   if (marker.dataset.active) {
+                      delete marker.dataset.active;
+                      deactivateWaypoint(i);
+                   }
+                }
+              });
+            }
           },
         });
 
-        // Animate guide along curved path
+        // Use genuine smooth cubic bezier spanning
+        let lastX = 0;
+        let isMovingRight = false;
+
         tl.to(guide, {
           duration: 1,
           ease: "none",
           motionPath: {
             path: pathPoints,
-            curviness: 2.5, // Amplified explicit bowing of the guide timeline trace
-            autoRotate: true,
+            curviness: 1.5, // Natural smooth looping curve
+            autoRotate: false, 
           },
-        });
-
-        // Activate each waypoint as guide passes through
-        markers.forEach((marker, i) => {
-          const progress = i / markers.length;
-
-          ScrollTrigger.create({
-            trigger: ".feature-guide-section",
-            start: `${progress * 60 + 10}% center`,
-            end: `${progress * 60 + 30}% center`,
-            onEnter: () => activateWaypoint(i),
-            onLeaveBack: () => deactivateWaypoint(i),
-          });
+          onUpdate: function() {
+            const currentX = gsap.getProperty(guide, "x") as number;
+            
+            if (currentX > lastX + 0.5 && !isMovingRight) {
+               isMovingRight = true;
+               gsap.to(".seer-right-img", { opacity: 1, duration: 0.3, overwrite: true });
+               gsap.to(".seer-left-img", { opacity: 0, duration: 0.3, overwrite: true });
+            } else if (currentX < lastX - 0.5 && isMovingRight) {
+               isMovingRight = false;
+               gsap.to(".seer-left-img", { opacity: 1, duration: 0.3, overwrite: true });
+               gsap.to(".seer-right-img", { opacity: 0, duration: 0.3, overwrite: true });
+            }
+            lastX = currentX;
+          }
         });
       });
     }
@@ -208,7 +234,7 @@ export function FeatureGuide() {
     <section
       ref={sectionRef}
       className="feature-guide-section relative bg-black overflow-hidden"
-      style={{ height: "250vh" }}
+      style={{ height: "350vh" }}
     >
       {/* Section header */}
       <div className="sticky top-0 pt-32 pb-8 px-6 md:px-16 text-center z-10 pointer-events-none">
@@ -232,25 +258,21 @@ export function FeatureGuide() {
           className="absolute z-20 guide-element"
           style={{ top: "18%", right: "15%" }}
         >
-          <div className="liquid-glass-strong w-16 h-16 rounded-full flex items-center justify-center relative">
-            {/* Glow */}
-            <div
-              className="absolute inset-0 rounded-full"
-              style={{
-                boxShadow: "0 0 30px 6px rgba(255,255,255,0.15)",
-              }}
+          <div className="w-24 h-24 relative flex items-center justify-center filter drop-shadow-[0_0_15px_rgba(255,50,50,0.4)] hover:scale-110 transition-transform cursor-pointer">
+            <Image
+              src="/seerleft.png"
+              alt="Seer Guide Left"
+              fill
+              className="object-contain absolute inset-0 z-10 seer-left-img opacity-100"
+              sizes="96px"
             />
-            {/* Trail */}
-            <div
-              className="absolute inset-0 rounded-full animate-ping"
-              style={{
-                backgroundColor: "rgba(255,255,255,0.05)",
-                animationDuration: "2s",
-              }}
+            <Image
+              src="/seerright.png"
+              alt="Seer Guide Right"
+              fill
+              className="object-contain absolute inset-0 z-10 seer-right-img opacity-0"
+              sizes="96px"
             />
-            <span className="text-white font-mono text-lg font-bold relative z-10">
-              ✦
-            </span>
           </div>
         </div>
       
@@ -272,7 +294,7 @@ export function FeatureGuide() {
               >
                 {/* Feature card */}
                 <div
-                  className="feature-card flex-1 max-w-lg"
+                  className="feature-card max-w-sm"
                   style={{
                     opacity: 0.3,
                     transform: "translateY(10px)",
@@ -282,12 +304,12 @@ export function FeatureGuide() {
                     {waypoint.label}
                   </span>
                   <h3
-                    className="font-[family-name:var(--font-display)] font-bold text-white tracking-tighter mt-4 mb-6"
-                    style={{ fontSize: "clamp(3rem, 6vw, 6rem)", lineHeight: "0.95" }}
+                    className="font-[family-name:var(--font-display)] font-bold text-white tracking-tighter mt-4 mb-4"
+                    style={{ fontSize: "clamp(2rem, 3.5vw, 3.5rem)", lineHeight: "0.95" }}
                   >
                     {waypoint.title}
                   </h3>
-                  <p className="font-body font-light text-white/80 text-xl md:text-2xl leading-relaxed max-w-md">
+                  <p className="font-body font-light text-white/70 text-lg leading-relaxed">
                     {waypoint.desc}
                   </p>
                 </div>
@@ -331,8 +353,6 @@ export function FeatureGuide() {
                   )}
                 </div>
 
-                {/* Spacer for opposite side */}
-                <div className="flex-1 max-w-lg" />
               </div>
             </div>
           );
