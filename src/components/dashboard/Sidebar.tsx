@@ -14,13 +14,28 @@ import {
   Sparkles,
   HelpCircle,
   LogOut,
-  Settings2
+  Settings2,
+  LucideIcon
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useAuthStore } from '@/lib/store';
 
-const navSections = [
+interface NavItem {
+  name: string;
+  icon: LucideIcon;
+  href: string;
+  badge?: number | string;
+  badgeVariant?: 'pending' | 'success'; 
+  action?: string;
+}
+
+interface NavSection {
+  label: string;
+  items: NavItem[];
+}
+
+const navSections: NavSection[] = [
   {
     label: 'Manage',
     items: [

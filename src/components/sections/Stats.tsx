@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 
 const stats = [
   { label: "STORES CREATED", value: "4,200+", detail: "Enterprise Grade" },
