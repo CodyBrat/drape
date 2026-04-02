@@ -3,36 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const entranceVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } }
-};
-
-const wordVariants = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0 }
-};
-
-const AnimatedHeadline = ({ text }: { text: string }) => {
-  const words = text.split(" ");
-  return (
-    <h1 className="font-heading italic text-4xl text-white leading-[0.9] mb-2 flex flex-wrap">
-      {words.map((word, i) => (
-        <motion.span
-          key={i}
-          variants={wordVariants}
-          initial="hidden"
-          animate="visible"
-          transition={{ duration: 0.5, delay: i * 0.06 }}
-          className="mr-2.5 inline-block"
-        >
-          {word}
-        </motion.span>
-      ))}
-    </h1>
-  );
-};
+import { ArrowRight, Mail, ArrowLeft } from 'lucide-react';
 
 export default function ForgotPasswordPage() {
   const [sent, setSent] = useState(false);
@@ -43,102 +14,115 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center relative px-6 py-24 overflow-hidden font-body antialiased">
-      {/* Background Video & Overlays */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <video 
-          src="/background.mp4" 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          className="w-full h-full object-cover opacity-60" 
-        />
+    <div className="min-h-screen bg-white text-[#111111] flex flex-col font-body antialiased selection:bg-black selection:text-white">
+      <main className="flex-1 flex flex-col items-center justify-center px-6 py-20">
         
-        {/* Seamless transition to black at the bottom */}
-        <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black via-black/90 to-transparent" />
-        
-        {/* Subtle radial glow at the top for aesthetic */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255,255,255,0.05) 0%, transparent 70%)"
-          }}
-        />
-      </div>
-
-      {/* Form Panel */}
-
-      {/* Form Panel */}
-      <motion.div 
-        className="relative z-10 liquid-glass-strong rounded-2xl p-8 md:p-10 max-w-md w-full mx-auto"
-        variants={entranceVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <AnimatePresence mode="wait">
-          {!sent ? (
-            <motion.div
-              key="form"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              transition={{ duration: 0.3 }}
-            >
-              <AnimatedHeadline text="Reset your password." />
-              <p className="font-body font-light text-sm text-white/40 mb-8">
-                Enter your email and we&apos;ll send you a reset link.
-              </p>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2 group">
-                  <label className="font-mono text-[10px] text-white/30 tracking-[0.2em] uppercase ml-1 transition-colors group-focus-within:text-white/60">
-                    EMAIL ADDRESS
-                  </label>
-                  <input 
-                    type="email" 
-                    placeholder="you@example.com"
-                    required
-                    className="bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white font-body text-sm placeholder:text-white/20 focus:border-white/40 focus:bg-white/[0.06] focus:outline-none transition-all duration-300 w-full hover:border-white/20"
-                  />
-                </div>
-
-                <motion.button 
-                  type="submit"
-                  whileHover={{ scale: 1.01, backgroundColor: "#f0f0f0" }}
-                  whileTap={{ scale: 0.98 }}
-                  className="mt-6 bg-white text-black rounded-full px-8 py-4 w-full font-body font-semibold text-sm transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
-                >
-                  Send Reset Link &rarr;
-                </motion.button>
-              </form>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="success"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              transition={{ duration: 0.3 }}
-              className="text-center py-4"
-            >
-              <h2 className="font-heading italic text-4xl text-white mb-4">Email Sent!</h2>
-              <p className="font-body text-sm text-white/60 mb-8">
-                If an account exists, a reset link will be sent to your email.
-              </p>
-              <div className="w-16 h-16 mx-auto rounded-full bg-white/10 flex items-center justify-center mb-6">
-                <span className="text-2xl">📧</span>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <div className="mt-10 text-center flex flex-col gap-3 border-t border-white/5 pt-8">
-          <Link href="/login" className="text-[10px] font-mono text-white/20 hover:text-white transition-all duration-300 uppercase tracking-widest">
-            &larr; Back to login
-          </Link>
+        {/* Heading Section */}
+        <div className="text-center mb-16 relative">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2 }}
+            className="absolute -top-6 left-1/2 -translate-x-[110%] w-24 h-12 pointer-events-none"
+          >
+            <svg viewBox="0 0 100 50" className="w-full h-full text-[#FFEB3B] opacity-60">
+              <path d="M10,40 Q50,10 90,40" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+            </svg>
+          </motion.div>
+          
+          <h1 className="font-heading italic text-6xl md:text-7xl lg:text-[5.5rem] leading-[1.1] text-[#111111] tracking-tight">
+            Forgot <br className="hidden md:block" />
+            <span className="relative inline-block mt-2">
+              Passcode?
+              <svg className="absolute -bottom-2 md:-bottom-4 left-0 w-full h-4 md:h-8 text-[#FFEB3B] -rotate-1 opacity-50" viewBox="0 0 100 20">
+                <path d="M5,15 Q50,5 95,15" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+              </svg>
+            </span>
+          </h1>
+          <p className="mt-8 text-[#6B7280] font-light text-lg md:text-xl max-w-lg mx-auto leading-relaxed">
+            Don&apos;t worry, it happens. Enter your email <br className="hidden md:block" /> and we&apos;ll get you back in.
+          </p>
         </div>
-      </motion.div>
+
+        {/* Action Area */}
+        <div className="w-full max-w-xl">
+          <AnimatePresence mode="wait">
+            {!sent ? (
+              <motion.div
+                key="form"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="flex flex-col gap-6"
+              >
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                  <div className="relative group">
+                    <div className="absolute left-8 top-1/2 -translate-y-1/2 text-[#9CA3AF] pointer-events-none group-focus-within:text-black transition-colors">
+                      <Mail size={20} />
+                    </div>
+                    <input 
+                      type="email" 
+                      placeholder="Enter your email address"
+                      required
+                      className="w-full h-[72px] rounded-full border border-[#E5E5E5] pl-16 pr-10 text-base font-medium placeholder:text-[#9CA3AF] focus:border-[#111111] focus:ring-4 focus:ring-black/5 outline-none transition-all"
+                    />
+                  </div>
+
+                  <button 
+                    type="submit"
+                    className="w-full h-[72px] rounded-full bg-black text-white px-10 flex items-center justify-between group hover:bg-[#222] transition-all overflow-hidden relative shadow-lg shadow-black/5"
+                  >
+                    <span className="text-base font-semibold">Send Reset Link</span>
+                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                      <ArrowRight size={18} />
+                    </div>
+                  </button>
+                </form>
+
+                <div className="text-center mt-4">
+                  <Link href="/login" className="inline-flex items-center gap-2 text-[#9CA3AF] hover:text-black font-semibold text-[15px] transition-all group">
+                    <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+                    Back to Login
+                  </Link>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="success"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="bg-[#F5F5F5] border border-[#E5E5E5] rounded-[2.5rem] p-12 text-center"
+              >
+                <div className="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl shadow-black/10">
+                   <Mail size={32} className="text-white" />
+                </div>
+                <h3 className="font-heading italic text-4xl text-[#111111] mb-4 tracking-tight">Check your inbox</h3>
+                <p className="text-[#6B7280] text-[15px] leading-relaxed mb-10 max-w-xs mx-auto">
+                  If an account exists for that email, you&apos;ll receive a reset link shortly.
+                </p>
+                
+                <div className="flex flex-col gap-4">
+                  <button 
+                    onClick={() => setSent(false)}
+                    className="w-full h-14 rounded-full border border-[#E5E5E5] text-black font-bold text-sm hover:bg-white transition-all shadow-sm"
+                  >
+                    Try another email
+                  </button>
+                  <Link href="/login" className="text-[#111111] font-bold text-[13px] uppercase tracking-widest hover:opacity-70 transition-opacity">
+                    Return to Login
+                  </Link>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+      </main>
+
+      {/* Footer */}
+      <footer className="w-full max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-center text-[13px] text-[#9CA3AF] border-t border-[#F5F5F5]">
+        <p>Copyrights @drape.group 2026</p>
+      </footer>
     </div>
   );
 }
