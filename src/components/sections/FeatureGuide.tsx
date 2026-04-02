@@ -76,7 +76,6 @@ export function FeatureGuide() {
       if (card) {
         gsap.to(card, {
           opacity: 1,
-          y: 0,
           duration: 0.3,
           ease: "power2.out",
         });
@@ -99,7 +98,6 @@ export function FeatureGuide() {
       if (card) {
         gsap.to(card, {
           opacity: 0.3,
-          y: 10,
           duration: 0.3,
         });
       }
@@ -142,6 +140,24 @@ export function FeatureGuide() {
             x: sectionRect.left + sectionRect.width / 2 - (guideRect.left + guideRect.width / 2),
             y: sectionRect.top + sectionRect.height * 0.95 - (guideRect.top + guideRect.height / 2),
           });
+        }
+
+        // Draw the visible dashed SVG line directly from the GSAP MotionPath spline
+        const fullPoints = [{ x: 0, y: 0 }, ...pathPoints];
+        const rawPath = MotionPathPlugin.arrayToRawPath(fullPoints, { curviness: 1.5 });
+        const svgData = MotionPathPlugin.rawPathToString(rawPath);
+        
+        const pathElem = document.getElementById("ghost-dashed-path");
+        if (pathElem && sectionRect) {
+          gsap.set(pathElem, { attr: { d: svgData } });
+          
+          const svgGroup = document.getElementById("ghost-dashed-group");
+          if (svgGroup) {
+            // Apply empirical -20px offset to shift the entire SVG line slightly left globally
+            const startX = guideRect.left - sectionRect.left + guideRect.width / 2 - 160;
+            const startY = guideRect.top - sectionRect.top + guideRect.height / 2;
+            gsap.set(svgGroup, { x: startX, y: startY });
+          }
         }
 
         // Create main timeline with physical collision checking
@@ -252,6 +268,20 @@ export function FeatureGuide() {
       {/* Guide & Waypoints coordinate layer */}
       <div className="absolute inset-0 px-6 md:px-16 max-w-6xl mx-auto w-full">
         
+        {/* Real-time Math Spline SVG Track */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible">
+          <g id="ghost-dashed-group">
+            <path
+              id="ghost-dashed-path"
+              stroke="rgba(255, 255, 255, 0.15)"
+              strokeWidth="2"
+              strokeDasharray="6 8"
+              fill="none"
+              strokeLinecap="round"
+            />
+          </g>
+        </svg>
+        
         {/* Guide element — starts top right */}
         <div
           ref={guideRef}
@@ -292,24 +322,29 @@ export function FeatureGuide() {
                   isMarkerLeft ? "flex-row-reverse" : "flex-row"
                 }`}
               >
-                {/* Feature card */}
+                {/* Premium Glassmorphism Feature card */}
                 <div
-                  className="feature-card max-w-sm"
+                  className="feature-card max-w-lg relative p-8 md:p-12 rounded-[2rem] bg-white/[0.02] border border-white/[0.05] backdrop-blur-[12px] shadow-2xl"
                   style={{
                     opacity: 0.3,
-                    transform: "translateY(10px)",
                   }}
                 >
-                  <span className="font-mono text-sm tracking-widest text-white/50 uppercase">
+                  {/* Subtle top edge highlight */}
+                  <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mix-blend-overlay" />
+                  
+                  <div className="inline-flex items-center gap-3 font-mono text-xs sm:text-sm text-white/70 bg-white/5 px-4 py-2 rounded-full uppercase tracking-widest border border-white/5">
+                    <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.8)]" />
                     {waypoint.label}
-                  </span>
+                  </div>
+                  
                   <h3
-                    className="font-[family-name:var(--font-display)] font-bold text-white tracking-tighter mt-4 mb-4"
-                    style={{ fontSize: "clamp(2rem, 3.5vw, 3.5rem)", lineHeight: "0.95" }}
+                    className="font-[family-name:var(--font-display)] font-bold text-white tracking-tighter mt-8 mb-6 drop-shadow-lg"
+                    style={{ fontSize: "clamp(3rem, 5vw, 5.5rem)", lineHeight: "0.95" }}
                   >
                     {waypoint.title}
                   </h3>
-                  <p className="font-body font-light text-white/70 text-lg leading-relaxed">
+                  
+                  <p className="font-body font-light text-white/60 text-xl font-normal leading-relaxed max-w-md">
                     {waypoint.desc}
                   </p>
                 </div>
@@ -338,19 +373,6 @@ export function FeatureGuide() {
                       strokeWidth={1.5}
                     />
                   </div>
-
-                  {/* Dashed connection line */}
-                  {index < GLOBAL_WAYPOINTS.length - 1 && (
-                    <div
-                      className="absolute top-full mt-2 left-1/2 -translate-x-1/2"
-                      style={{
-                        width: "1px",
-                        height: "60px",
-                        background:
-                          "repeating-linear-gradient(to bottom, rgba(255,255,255,0.15) 0px, rgba(255,255,255,0.15) 4px, transparent 4px, transparent 8px)",
-                      }}
-                    />
-                  )}
                 </div>
 
               </div>
